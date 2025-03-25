@@ -16,11 +16,14 @@ namespace eShop.Repository.Entities
         public required int Stock { get; set; }
 
 
-        [Column("brand_id")]
+        [Column("FK_brand_id")]
+        public int BrandId { get; set; }
         public required Brand Brand { get; set; }
 
-        [Column("FK_productcategory_id")]
-        public required ICollection<ProductCategory> ProductCategory { get; set; }
+        [Column("FK_categoryproduct_id")]
+        public ICollection<CategoryProduct>? CategoryProducts { get; set; } = null!;
+
+        public ICollection<Category> Categories { get; set; } = null!;
 
     }
 }

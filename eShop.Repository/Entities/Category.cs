@@ -11,7 +11,9 @@ namespace eShop.Repository.Entities
 
         public string? Description { get; set; }
 
-        [Column("FK_productcategory_id")]
-        public required ICollection<ProductCategory> ProductCategories { get; set; }
+        [Column("FK_categoryproduct_id")]
+        public ICollection<CategoryProduct> CategoryProducts { get; set; } = [];
+
+        public ICollection<Product> Products { get; set; }
     }
 }
