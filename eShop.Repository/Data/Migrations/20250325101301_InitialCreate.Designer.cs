@@ -10,7 +10,7 @@ using eShop.Repository.Data;
 
 namespace eShop.Repository.data.migrations
 {
-    [DbContext(typeof(eShopDbContext))]
+    [DbContext(typeof(EShopDbContext))]
     [Migration("20250325101301_InitialCreate")]
     partial class InitialCreate
     {

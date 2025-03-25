@@ -9,7 +9,7 @@ using eShop.Repository.Data;
 
 namespace eShop.Repository.data.migrations
 {
-    [DbContext(typeof(eShopDbContext))]
+    [DbContext(typeof(EShopDbContext))]
     partial class eShopDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

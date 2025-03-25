@@ -6,10 +6,10 @@ namespace eShop.Repository.Repositories.Repository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly eShopDbContext _dbContext;
+        private readonly EShopDbContext _dbContext;
         private readonly DbSet<T> _dbSet;
 
-        public GenericRepository(eShopDbContext dbContext)
+        public GenericRepository(EShopDbContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<T>();
