@@ -22,11 +22,11 @@ namespace eShop.Repository.Entities
 
         [Column("FK_brand_id")]
         public int BrandId { get; set; }
-        public required Brand Brand { get; set; }
+        public Brand? Brand { get; set; }
 
         [Column("FK_subcategory_id")]
         public int SubCategoryId { get; set; }
-        public required SubCategory SubCategory { get; set; } = null!;
+        public SubCategory SubCategory { get; set; } = null!;
 
         //[Column("FK_review_id")]
         //public int ReviewId { get; set; }

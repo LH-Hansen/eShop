@@ -13,7 +13,7 @@ namespace eShop.Repository.Entities
         public double TotalAmount { get; set; }
 
         //[Column("FK_orderline)id")]
-        public required ICollection<OrderLine> OrderLine { get; set; }
+        public ICollection<OrderLine>? OrderLine { get; set; }
 
     }
 }

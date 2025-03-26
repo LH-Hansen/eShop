@@ -16,7 +16,7 @@ namespace eShop.Repository.Entities
 
         [Column("FK_category_id")]
         public int CategoryId { get; set; }
-        public required Category Category { get; set; }
+        public Category? Category { get; set; }
 
         [Category("FK_product_id")]
         public ICollection<Product>? Products { get; set; }
