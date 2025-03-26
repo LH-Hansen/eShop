@@ -382,3 +382,12 @@ FodyWeavers.xsd
 /eShop.Repository/Data/Migrations/20250326092926_ChangedReview.cs
 /eShop.Repository/Data/Migrations/20250326092926_ChangedReview.Designer.cs
 /eShop.Repository/Data/Migrations/EShopDbContextModelSnapshot.cs
+/eShop.Repository/Data/Migrations/20250326095634_InitialCreate.cs
+/eShop.Repository/Data/Migrations/20250326095634_InitialCreate.Designer.cs
+/eShop.Repository/Data/Migrations/20250326095818_AddedSubCategoryDataSeeding.cs
+/eShop.Repository/Data/Migrations/20250326095818_AddedSubCategoryDataSeeding.Designer.cs
+/eShop.Repository/Data/Migrations/20250326095957_AddedProductDataSeeding.cs
+/eShop.Repository/Data/Migrations/20250326095957_AddedProductDataSeeding.Designer.cs
+/eShop.Repository/Data/Migrations/20250326100253_AddedOderAndOderLineDataSeeding.cs
+/eShop.Repository/Data/Migrations/20250326100253_AddedOderAndOderLineDataSeeding.Designer.cs
+/eShop.Repository/Data/Migrations/eShopDbContextModelSnapshot.cs
