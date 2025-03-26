@@ -28,8 +28,6 @@ namespace eShop.Repository.Entities
         public int SubCategoryId { get; set; }
         public SubCategory SubCategory { get; set; } = null!;
 
-        //[Column("FK_review_id")]
-        //public int ReviewId { get; set; }
         public ICollection<Review>? Reviews { get; set; }
 
     }
