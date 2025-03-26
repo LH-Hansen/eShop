@@ -361,3 +361,24 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/eShop.Repository/Data/Migrations/20250326080951_InitialCreate.cs
+/eShop.Repository/Data/Migrations/20250326080951_InitialCreate.Designer.cs
+/eShop.Repository/Data/Migrations/20250326081331_ChangedProductCategoryRelatioship.cs
+/eShop.Repository/Data/Migrations/20250326081331_ChangedProductCategoryRelatioship.Designer.cs
+/eShop.Repository/Data/Migrations/20250326082015_AddedIdToEntities.cs
+/eShop.Repository/Data/Migrations/20250326082015_AddedIdToEntities.Designer.cs
+/eShop.Repository/Data/Migrations/20250326082942_ChangedColumnNames.cs
+/eShop.Repository/Data/Migrations/20250326082942_ChangedColumnNames.Designer.cs
+/eShop.Repository/Data/Migrations/20250326083340_AddedProductReviews.cs
+/eShop.Repository/Data/Migrations/20250326083340_AddedProductReviews.Designer.cs
+/eShop.Repository/Data/Migrations/20250326084319_ChangedProductReviewRelationship.cs
+/eShop.Repository/Data/Migrations/20250326084319_ChangedProductReviewRelationship.Designer.cs
+/eShop.Repository/Data/Migrations/20250326085218_ChangedProductColumnName.cs
+/eShop.Repository/Data/Migrations/20250326085218_ChangedProductColumnName.Designer.cs
+/eShop.Repository/Data/Migrations/20250326092347_AddedOrderAndOrderLine.cs
+/eShop.Repository/Data/Migrations/20250326092347_AddedOrderAndOrderLine.Designer.cs
+/eShop.Repository/Data/Migrations/20250326092730_ChangedProductReview.cs
+/eShop.Repository/Data/Migrations/20250326092730_ChangedProductReview.Designer.cs
+/eShop.Repository/Data/Migrations/20250326092926_ChangedReview.cs
+/eShop.Repository/Data/Migrations/20250326092926_ChangedReview.Designer.cs
+/eShop.Repository/Data/Migrations/EShopDbContextModelSnapshot.cs

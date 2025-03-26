@@ -7,23 +7,30 @@ namespace eShop.Repository.Entities
         [Column("product_id")]
         public int Id { get; set; }
 
-        public double Price { get; set; }
+        [Column("price")]
+        public required double Price { get; set; }
 
+        [Column("name")]
         public required string Name { get; set; }
 
+        [Column("description")]
         public string? Description { get; set; }
 
-        public required int Stock { get; set; }
+        [Column("stock")]
+        public int Stock { get; set; } = 0;
 
 
         [Column("FK_brand_id")]
         public int BrandId { get; set; }
         public required Brand Brand { get; set; }
 
-        [Column("FK_categoryproduct_id")]
-        public ICollection<CategoryProduct>? CategoryProducts { get; set; } = null!;
+        [Column("FK_subcategory_id")]
+        public int SubCategoryId { get; set; }
+        public required SubCategory SubCategory { get; set; } = null!;
 
-        public ICollection<Category> Categories { get; set; } = null!;
+        //[Column("FK_review_id")]
+        //public int ReviewId { get; set; }
+        public ICollection<Review>? Reviews { get; set; }
 
     }
 }

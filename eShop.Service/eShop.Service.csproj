@@ -11,4 +11,8 @@
     <Folder Include="Services\Service\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\eShop.Repository\eShop.Repository.csproj" />
+  </ItemGroup>
+
 </Project>
