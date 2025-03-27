@@ -175,7 +175,7 @@ This project depends on the following libraries:
 
 ### Current Version
 
-Current version: `1.0.0`
+Current version: `0.2.0`
 
 <br>
 
