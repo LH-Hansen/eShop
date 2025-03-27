@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShop.Repository", "eShop.R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShop.Service", "eShop.Service\eShop.Service.csproj", "{224E592E-7705-43B2-9242-047221753797}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShop.Web", "eShop.Web\eShop.Web.csproj", "{28DAADDA-F728-43DF-B8C1-D079C6F270B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShop.Test", "eShop.Test\eShop.Test.csproj", "{2C120B38-56F6-4EBA-ADC8-CD219E59BDC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{224E592E-7705-43B2-9242-047221753797}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{224E592E-7705-43B2-9242-047221753797}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{224E592E-7705-43B2-9242-047221753797}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28DAADDA-F728-43DF-B8C1-D079C6F270B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28DAADDA-F728-43DF-B8C1-D079C6F270B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28DAADDA-F728-43DF-B8C1-D079C6F270B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28DAADDA-F728-43DF-B8C1-D079C6F270B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C120B38-56F6-4EBA-ADC8-CD219E59BDC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C120B38-56F6-4EBA-ADC8-CD219E59BDC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C120B38-56F6-4EBA-ADC8-CD219E59BDC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C120B38-56F6-4EBA-ADC8-CD219E59BDC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

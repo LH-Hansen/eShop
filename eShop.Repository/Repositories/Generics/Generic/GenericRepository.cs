@@ -1,8 +1,8 @@
 ﻿using eShop.Repository.Data;
-using eShop.Repository.Repositories.IRepository;
+using eShop.Repository.Repositories.Generics.Interface;
 using Microsoft.EntityFrameworkCore;
 
-namespace eShop.Repository.Repositories.Repository
+namespace eShop.Repository.Repositories.Generics.Generic
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
@@ -37,6 +37,16 @@ namespace eShop.Repository.Repositories.Repository
 
             _dbSet.Remove(entity);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<int> GetCountAsync()
+        {
+            return await _dbSet.CountAsync();
+        }
+
+        public async Task<IEnumerable<T>> GetPaginatedAsync(int page, int pageSize)
+        {
+            return await _dbSet.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
         }
     }
 }

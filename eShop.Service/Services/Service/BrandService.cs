@@ -1,58 +1,32 @@
 ﻿using eShop.Repository.Entities;
-using eShop.Repository.Repositories.IRepository;
-using eShop.Service.DTO;
+using eShop.Repository.Repositories.Generics.Interface;
+using eShop.Service.Services.Generics.GenericSerivice;
+using eShop.Service.Services.IService;
 
 namespace eShop.Service.Services.Service
 {
-    public class BrandService(IGenericRepository<Brand> brandRepository)
+    public class BrandService : GenericService<Brand>, IBrandService
     {
-        private readonly IGenericRepository<Brand> _brandRepository = brandRepository;
+        private readonly IGenericRepository<Brand> _brandRepository;
 
-        public async Task<BrandDTO> GetByIdAsync(int id) => ConvertToDTO(await _brandRepository.GetByIdAsync(id));
-
-        public async Task<IEnumerable<BrandDTO>> GetAllAsync()
+        public BrandService(IGenericRepository<Brand> brandRepository) : base(brandRepository)
         {
-            ICollection<BrandDTO> brandColletion = [];
+            _brandRepository = brandRepository;
+        }
 
-            foreach (Brand brand in await _brandRepository.GetAllAsync())
+        public async Task<IEnumerable<Brand>> GetPaginatedSearchAsync(int page, int pageSize, string searchTerm = null)
+        {
+            IEnumerable<Brand> brands = await _brandRepository.GetAllAsync();
+
+            if (!string.IsNullOrEmpty(searchTerm))
             {
-                brandColletion.Add(ConvertToDTO(brand));
+                brands = brands.Where(b => b.Name.Contains(searchTerm));
             }
 
-            return brandColletion;
+            var paginatedBrands = brands.Skip((page - 1) * pageSize)
+                                        .Take(pageSize)
+                                        .ToList();
+            return paginatedBrands;
         }
-
-        public async Task AddAsync(BrandDTO brandDTO) => await _brandRepository.AddAsync(ConvertToBrand(brandDTO));
-
-        public async Task UpdateAsync(BrandDTO brandDTO) => await _brandRepository.UpdateAsync(ConvertToBrand(brandDTO));
-
-        public async Task DeleteAsync(int id) => await _brandRepository.DeleteAsync(id);
-
-        public static BrandDTO ConvertToDTO(Brand brand)
-        {
-            BrandDTO brandDTO = new()
-            {
-                Id = brand.Id,
-                Name = brand.Name,
-                Description = brand.Description,
-                Products = brand.Products
-            };
-
-            return brandDTO;
-        }
-
-        public static Brand ConvertToBrand(BrandDTO brandDTO)
-        {
-            Brand brand = new()
-            {
-                Id = brandDTO.Id,
-                Name = brandDTO.Name,
-                Description = brandDTO.Description,
-                Products = brandDTO.Products
-            };
-
-            return brand;
-        }
-
     }
 }
