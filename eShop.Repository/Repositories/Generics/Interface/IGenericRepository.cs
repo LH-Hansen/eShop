@@ -1,4 +1,4 @@
-﻿namespace eShop.Repository.Repositories.IRepository
+﻿namespace eShop.Repository.Repositories.Generics.Interface
 {
     public interface IGenericRepository<T> where T : class
     {
@@ -7,5 +7,7 @@
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);
         Task UpdateAsync(T entity);
+        Task<int> GetCountAsync();
+        Task<IEnumerable<T>> GetPaginatedAsync(int page, int pageSize);
     }
 }

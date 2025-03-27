@@ -1,0 +1,41 @@
+﻿@page 
+@model eShop.Web.Pages.BrandSearchModel
+@{
+    ViewData["Title"] = "Search Brands";
+}
+
+<h2>Search Brands</h2>
+
+<form method="get">
+    <div class="form-group">
+        <label for="SearchTerm">Brand Name:</label>
+        <input type="text" id="SearchTerm" class="form-control" name="SearchTerm" value="@Model.SearchTerm" />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+@if (Model.Brands != null && Model.Brands.Any())
+{
+        <h3>Results</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Brand Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var brand in Model.Brands)
+            {
+                        <tr>
+                            <td>@brand.Name</td>
+                            <td>@brand.Description</td>
+                        </tr>
+            }
+            </tbody>
+        </table>
+}
+else if (Model.SearchTerm != null)
+{
+        <p>No brands found matching '@Model.SearchTerm'.</p>
+}

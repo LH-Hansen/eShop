@@ -19,6 +19,8 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
+    <Folder Include="Repositories\IRepository\" />
+    <Folder Include="Repositories\Repository\" />
   </ItemGroup>
 
 </Project>
