@@ -103,7 +103,7 @@ Here’s an example of how you can use the application for specific tasks:
 
 - **Creating a Brand**: Use the form to input the brand name and description, then click the "Create Brand" button.
 - **Updating a Brand**: Modify an existing brand’s name or description, then click the "Update" button.
-- **DEleting a Brand**: Click the "Delete" button next to a brand to remove it.
+- **Deleting a Brand**: Click the "Delete" button next to a brand to remove it.
 
 <br>
 
@@ -141,6 +141,7 @@ Yes! Join our community on [link to community platform, e.g., Discord, Slack, et
 This section provides visual representations of the project architecture and workflows.
 
 #1. Database diagram
+![eShop_Db_Diagram](https://github.com/user-attachments/assets/5f060eeb-eee2-4a9d-9176-65d52399030e)
 
 
 <br>
@@ -190,8 +191,8 @@ This project follows [Semantic Versioning](https://semver.org/) for version cont
 - Add Product
 - Fix bug pagination bug
 
-#### [1.0.0] - 2025-03-27
-- Initial release with basic CRUD functionality for Brand.
+#### [0.2.0] - 2025-03-27
+- Initial alpha release with basic CRUD functionality for Brand.
 
 #### [0.1.0] - 2024-10-21
 - Models have been created.
