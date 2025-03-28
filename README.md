@@ -151,10 +151,10 @@ This project is built using .NET 8.0.
 
 | **Project**           | **Framework**  | **Folder Structure**                         |
 |-----------------------|:--------------:|----------------------------------------------:|
-| **eShop.Repository**   | .NET 8.0       | `eShop.Repository`<br>- `Entities`<br>- `Repositories`<br>- `DataContext.cs` |
-| **eShop.Service**      | .NET 8.0       | `eShop.Service`<br>- `Services`<br>- `Dtos`<br>- `Mappings` |
-| **eShop.Web**          | .NET 8.0       | `eShop.Web`<br>- `Pages`<br>- `wwwroot`<br>- `Views`<br>- `Models`<br>- `Startup.cs` or `Program.cs` |
-| **eShop.Tests**        | .NET 8.0       | `eShop.Tests`<br>- `UnitTests`<br>- `TestUtils`<br>- `MockData` |
+| **eShop.Repository**   | .NET 8.0       | `eShop.Repository`<br>- `Entities`<br>- `Repositories`<br>- `Data` |
+| **eShop.Service**      | .NET 8.0       | `eShop.Service`<br>- `Services`<br>- `DTO` |
+| **eShop.Web**          | .NET 8.0       | `eShop.Web`<br>- `Pages`<br>- `wwwroot` <br>- `Program.cs` |
+| **eShop.Tests**        | .NET 8.0       | `eShop.Tests`<br>- `UnitTests`<br>- |
 
 
 <br>
