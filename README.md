@@ -9,14 +9,12 @@
 - [System Requirements](#%EF%B8%8F-system-requirements)
 - [Installation](#-installation)
 - [Usage](#-usage)
-- [Screenshots](#-screenshots)
 - [FAQs](#-faqs)
 
 ### Technical Details
 - [Diagrams](#-diagrams)
 - [Framework](#%EF%B8%8F-framework)
 - [Dependencies](#-dependencies)
-- [API Documentation](#-api-documentation)
 - [Versioning & Changelog](#-versioning-and-changelog)
 - [TODO](#-todo-list)
 - [Known Issues](#-known-issues)
@@ -167,12 +165,12 @@ This project depends on the following libraries:
 
 | Package                                 | Creator   | Version |   Project  |
 |:----------------------------------------|:---------:|:-------:|:----------:|
-| Microsoft.EntityFrameworkCore           | Microsoft | `9.0.3` | eShop.Repository |
-| Microsoft.EntityFrameworkCore.SqlServer | Microsoft | `9.0.3` | eShop.Repository |
-| Microsoft.EntityFrameworkCore.Tools     | Microsoft | `9.0.3` | eShop.Repository |
-| Microsoft.EntityFrameworkCore.Configuration     | Microsoft | `9.0.3` | eShop.Repository |
-| FluintAssertions                        | Dennis Doomen, Jonas Nyrup, Xceed | `8.2.0`| eShop.Test |
-| MOQ                                     | Daniel Cazzulino, kzu | `4.20.72`| eShop.Test |
+| [Microsoft.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore)          | Microsoft | `9.0.3` | eShop.Repository |
+| [Microsoft.EntityFrameworkCore.SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer) | Microsoft | `9.0.3` | eShop.Repository |
+| [Microsoft.EntityFrameworkCore.Tools](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools)     | Microsoft | `9.0.3` | eShop.Repository |
+| [Microsoft.EntityFrameworkCore.Configuration](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Configuration)     | Microsoft | `9.0.3` | eShop.Repository |
+| [FluentAssertions](https://www.nuget.org/packages/FluentAssertions)                        | Dennis Doomen, Jonas Nyrup, Xceed | `8.2.0`| eShop.Test |
+| [Moq](https://www.nuget.org/packages/Moq)                                     | Daniel Cazzulino, kzu | `4.20.72`| eShop.Test |
 <br>
 
 ## 📋 Versioning and Changelog
@@ -250,6 +248,8 @@ Thank you for your interest in contributing! At this time, we are not accepting 
 - **[ASP.NET Core](link)**: For providing the framework and tools used to build this application.
 - **[Entity Framework Core](link)**: For ORM and database management.
 - **Bootstrap**: For the responsive design and styling.
+- **[FluentAssertions](https://www.nuget.org/packages/FluentAssertions)**: For providing a more readable and fluent way to write assertions in unit tests.
+- **[Moq](https://www.nuget.org/packages/Moq)**: For helping create mock objects for unit testing and verifying interactions.
 
 <br>
 
