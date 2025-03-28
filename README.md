@@ -247,7 +247,7 @@ Thank you for your interest in contributing! At this time, we are not accepting 
 
 - **[ASP.NET Core](link)**: For providing the framework and tools used to build this application.
 - **[Entity Framework Core](link)**: For ORM and database management.
-- **Bootstrap**: For the responsive design and styling.
+- **[Bootstrap](https://getbootstrap.com/)**: For the responsive design and styling.
 - **[FluentAssertions](https://www.nuget.org/packages/FluentAssertions)**: For providing a more readable and fluent way to write assertions in unit tests.
 - **[Moq](https://www.nuget.org/packages/Moq)**: For helping create mock objects for unit testing and verifying interactions.
 
