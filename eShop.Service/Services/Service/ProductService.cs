@@ -1,6 +1,6 @@
 ﻿using eShop.Repository.Entities;
 using eShop.Repository.Repositories.Generics.Interface;
-using eShop.Service.Services.Generics.GenericSerivice;
+using eShop.Service.Services.Generics.Generic;
 using eShop.Service.Services.IService;
 
 namespace eShop.Service.Services.Service

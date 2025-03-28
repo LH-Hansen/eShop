@@ -17,8 +17,6 @@ namespace eShop.Web.Pages
 
         public string? Message { get; set; }
 
-        [BindProperty]
-        public string SearchTerm { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -40,6 +38,8 @@ namespace eShop.Web.Pages
                 ModelState.AddModelError(string.Empty, "An error occurred while creating the brand.");
             }
 
+            await LoadBrands();
+
             return Page();
         }
 
@@ -49,7 +49,6 @@ namespace eShop.Web.Pages
             {
                 try
                 {
-
                     await _brandService.UpdateAsync(Brand);
                     Message = "Brand updated successfully!";
                 }
@@ -58,6 +57,8 @@ namespace eShop.Web.Pages
                     ModelState.AddModelError(string.Empty, "An error occurred while updating the brand.");
                 }
             }
+
+            await LoadBrands();
 
             return Page();
         }
@@ -76,7 +77,15 @@ namespace eShop.Web.Pages
                     ModelState.AddModelError(string.Empty, "An error occurred while deleting the brand.");
                 }
             }
+
+            await LoadBrands();
+
             return Page();
+        }
+
+        private async Task LoadBrands()
+        {
+            Brands = await _brandService.GetAllAsync();
         }
     }
 }

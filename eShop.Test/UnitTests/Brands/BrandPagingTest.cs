@@ -3,7 +3,7 @@ using eShop.Service.Services.IService;
 using FluentAssertions;
 using Moq;
 
-namespace eShop.Test.UnitTest
+namespace eShop.Test.UnitTests.Brands
 {
     public class BrandPagingTest
     {
@@ -15,15 +15,15 @@ namespace eShop.Test.UnitTest
         }
 
         [Fact]
-        public async Task GetPaginatedBrands_ShouldReturnCorrectPageData()
+        public async Task GetPaginatedBrandsTest()
         {
             // Arrange
             int page = 2;
             int pageSize = 5;
-            string searchTerm = null;
+            string? searchTerm = null;
 
-            var allBrands = new List<Brand>
-            {
+            List<Brand> allBrands =
+            [
 
                 new() { Id = 0, Name = "Brand 0" },
                 new() { Id = 1, Name = "Brand 1" },
@@ -36,7 +36,7 @@ namespace eShop.Test.UnitTest
                 new() { Id = 8, Name = "Brand 8" },
                 new() { Id = 9, Name = "Brand 9" },
                 new() { Id = 10, Name = "Brand 10" }
-            };
+            ];
 
             _mockBrandService.Setup(service => service.GetPaginatedSearchAsync(page, pageSize, searchTerm))
                              .ReturnsAsync(allBrands.Skip((page - 1) * pageSize)
@@ -44,7 +44,7 @@ namespace eShop.Test.UnitTest
                              .ToList());
 
             // Act
-            var brands = await _mockBrandService.Object.GetPaginatedSearchAsync(page, pageSize, searchTerm);
+            IEnumerable<Brand> brands = await _mockBrandService.Object.GetPaginatedSearchAsync(page, pageSize, searchTerm);
 
             /// Assert
             brands.Should().HaveCount(pageSize);

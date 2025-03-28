@@ -67,8 +67,8 @@ namespace eShop.Repository.Data
                 new OrderLine { Id = 3, OrderId = 2, ProductId = 2, Quantity = 1, Price = 899.99 }
             );
 
-            DateTime orderDate1 = new DateTime(2025, 3, 26);
-            DateTime orderDate2 = new DateTime(2025, 3, 25);
+            DateTime orderDate1 = new(2025, 3, 26);
+            DateTime orderDate2 = new(2025, 3, 25);
 
             modelBuilder.Entity<Order>().HasData(
                 new Order { Id = 1, OrderDate = orderDate1, TotalAmount = 2799.98 },

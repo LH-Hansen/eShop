@@ -1,7 +1,7 @@
 using eShop.Repository.Data;
 using eShop.Repository.Repositories.Generics.Generic;
 using eShop.Repository.Repositories.Generics.Interface;
-using eShop.Service.Services.Generics.GenericSerivice;
+using eShop.Service.Services.Generics.Generic;
 using eShop.Service.Services.Generics.IGenericService;
 using eShop.Service.Services.IService;
 using eShop.Service.Services.Service;

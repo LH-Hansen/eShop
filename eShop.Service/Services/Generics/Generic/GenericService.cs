@@ -1,16 +1,13 @@
-﻿using eShop.Repository.Repositories.Generics.Interface;
+﻿// Ignore Spelling: Serivice
+
+using eShop.Repository.Repositories.Generics.Interface;
 using eShop.Service.Services.Generics.IGenericService;
 
-namespace eShop.Service.Services.Generics.GenericSerivice
+namespace eShop.Service.Services.Generics.Generic
 {
-    public class GenericService<T> : IGenericService<T> where T : class
+    public class GenericService<T>(IGenericRepository<T> repository) : IGenericService<T> where T : class
     {
-        protected readonly IGenericRepository<T> _repository;
-
-        public GenericService(IGenericRepository<T> repository)
-        {
-            _repository = repository;
-        }
+        protected readonly IGenericRepository<T> _repository = repository;
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
