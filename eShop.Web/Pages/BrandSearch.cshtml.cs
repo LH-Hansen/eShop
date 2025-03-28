@@ -21,14 +21,8 @@ namespace eShop.Web.Pages
 
         public async Task OnGetAsync()
         {
-            if (!string.IsNullOrEmpty(SearchTerm))
-            {
-                Brands = await _brandService.GetPaginatedSearchAsync(1, 100, SearchTerm);
-            }
-            else
-            {
-                Brands = new List<Brand>();
-            }
+            Brands = await _brandService.GetPaginatedSearchAsync(1, 100, SearchTerm);
+            Brands = Brands.OrderBy(b => b.Name);
         }
     }
 }

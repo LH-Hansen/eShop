@@ -10,12 +10,12 @@ namespace eShop.Web.Pages
         private readonly IBrandService _brandService = brandService;
         private const int PageSize = 10;
 
-        public IEnumerable<Brand> Brands { get; set; }
+        public IEnumerable<Brand>? Brands { get; set; }
         public int CurrentPage { get; set; }
         public int TotalPages { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public int Page { get; set; } = 1;
+        public new int Page { get; set; } = 1;
 
         public async Task OnGetAsync()
         {
