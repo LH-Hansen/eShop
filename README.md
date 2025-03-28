@@ -191,6 +191,10 @@ This project follows [Semantic Versioning](https://semver.org/) for version cont
 - Add Product
 - Fix bug pagination bug
 
+### [0.3.0] - 2025-03-27
+- Added CRUD unitTest for Brand.
+- changed Brand search feature to uncapitalized search, and sorting alphabetically.
+
 #### [0.2.0] - 2025-03-27
 - Initial alpha release with basic CRUD functionality for Brand.
 
@@ -207,7 +211,7 @@ This project follows [Semantic Versioning](https://semver.org/) for version cont
   - **Workaround**: None currently, will be addressed in future updates.
 
 - **Issue 2**: Search functionality is case-sensitive.
-  - **Status**: To be improved in future updates.
+  - **Status**: Has been fixed.
 
 If you encounter any other issues not listed here, please feel free to report them!
 
@@ -226,6 +230,7 @@ If you encounter any other issues not listed here, please feel free to report th
 
 ### [LOW] Enhancements
 - [ ] Improve UI design.
+- [x] Remove casesensitivity in search
 
 
 <br>
