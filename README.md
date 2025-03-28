@@ -147,13 +147,15 @@ This section provides visual representations of the project architecture and wor
 
 ## 🛠️ Framework
 
-This project is built using [Your Framework Name].
+This project is built using .NET 8.0.
 
-| Project       | Framework     | Folder structure  |
-| ------------- |:-------------:| -----------------:|
-| BuisnessLogic | .NET 8.0      | FBF               |
-| DataAcess     | .NET 8.0      | FBF               |
-| Presentation  | .NET 8.0      | FBT               |
+| **Project**           | **Framework**  | **Folder Structure**                         |
+|-----------------------|:--------------:|----------------------------------------------:|
+| **eShop.Repository**   | .NET 8.0       | `eShop.Repository`<br>- `Entities`<br>- `Repositories`<br>- `DataContext.cs` |
+| **eShop.Service**      | .NET 8.0       | `eShop.Service`<br>- `Services`<br>- `Dtos`<br>- `Mappings` |
+| **eShop.Web**          | .NET 8.0       | `eShop.Web`<br>- `Pages`<br>- `wwwroot`<br>- `Views`<br>- `Models`<br>- `Startup.cs` or `Program.cs` |
+| **eShop.Tests**        | .NET 8.0       | `eShop.Tests`<br>- `UnitTests`<br>- `TestUtils`<br>- `MockData` |
+
 
 <br>
 
@@ -165,9 +167,12 @@ This project depends on the following libraries:
 
 | Package                                 | Creator   | Version |   Project  |
 |:----------------------------------------|:---------:|:-------:|:----------:|
-| Microsoft.EntityFrameworkCore           | Microsoft | `8.0.10`| DataAccess |
-| Microsoft.EntityFrameworkCore.SqlServer | Microsoft | `8.0.10`| DataAccess |
-| Microsoft.EntityFrameworkCore.Tools     | Microsoft | `8.0.10`| DataAccess |
+| Microsoft.EntityFrameworkCore           | Microsoft | `9.0.3` | eShop.Repository |
+| Microsoft.EntityFrameworkCore.SqlServer | Microsoft | `9.0.3` | eShop.Repository |
+| Microsoft.EntityFrameworkCore.Tools     | Microsoft | `9.0.3` | eShop.Repository |
+| Microsoft.EntityFrameworkCore.Configuration     | Microsoft | `9.0.3` | eShop.Repository |
+| FluintAssertions                        | Dennis Doomen, Jonas Nyrup, Xceed | `8.2.0`| eShop.Test |
+| MOQ                                     | Daniel Cazzulino, kzu | `4.20.72`| eShop.Test |
 <br>
 
 ## 📋 Versioning and Changelog
