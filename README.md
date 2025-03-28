@@ -139,8 +139,7 @@ Yes! Join our community on [link to community platform, e.g., Discord, Slack, et
 ## 📊 Diagrams
 
 This section provides visual representations of the project architecture and workflows.
-
-#1. Database diagram
+### 1. Database diagram
 ![eShop_Db_Diagram](https://github.com/user-attachments/assets/5f060eeb-eee2-4a9d-9176-65d52399030e)
 
 
