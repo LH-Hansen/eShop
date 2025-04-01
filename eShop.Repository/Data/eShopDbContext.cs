@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace eShop.Repository.Data
 {
-    public class EShopDbContext : DbContext
+    public class EShopDbContext(DbContextOptions<EShopDbContext> options) : DbContext(options)
     {
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -11,10 +11,6 @@ namespace eShop.Repository.Data
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }
-
-        public EShopDbContext(DbContextOptions<EShopDbContext> options) : base(options)
-        {
-        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

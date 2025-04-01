@@ -19,7 +19,7 @@ namespace eShop.Web.Pages
 
         public async Task OnGetAsync()
         {
-            var totalCount = await _brandService.GetCountAsync();
+            int totalCount = await _brandService.GetCountAsync();
 
             TotalPages = (int)Math.Ceiling(totalCount / (double)PageSize);
 

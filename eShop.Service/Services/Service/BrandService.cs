@@ -14,14 +14,11 @@ namespace eShop.Service.Services.Service
             IEnumerable<Brand> brands = await _brandRepository.GetAllAsync();
 
             if (!string.IsNullOrWhiteSpace(searchTerm))
-            {
-                searchTerm = searchTerm.ToLower();
-                brands = brands.Where(b => b.Name.ToLower().Contains(searchTerm));
-            }
+                brands = brands.Where(b => b.Name.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase));
 
             List<Brand> paginatedBrands = brands.Skip((page - 1) * pageSize)
-                                        .Take(pageSize)
-                                        .ToList();
+                                                .Take(pageSize)
+                                                .ToList();
             return paginatedBrands;
         }
     }

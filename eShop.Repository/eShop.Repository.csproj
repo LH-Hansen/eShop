@@ -8,6 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Repositories\IRepository\**" />
+    <Compile Remove="Repositories\Repository\**" />
+    <EmbeddedResource Remove="Repositories\IRepository\**" />
+    <EmbeddedResource Remove="Repositories\Repository\**" />
+    <None Remove="Repositories\IRepository\**" />
+    <None Remove="Repositories\Repository\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.3">
@@ -19,8 +28,6 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Repositories\IRepository\" />
-    <Folder Include="Repositories\Repository\" />
   </ItemGroup>
 
 </Project>

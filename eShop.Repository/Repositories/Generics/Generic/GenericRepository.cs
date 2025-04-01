@@ -39,14 +39,9 @@ namespace eShop.Repository.Repositories.Generics.Generic
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<int> GetCountAsync()
-        {
-            return await _dbSet.CountAsync();
-        }
+        public async Task<int> GetCountAsync() => await _dbSet.CountAsync();
 
-        public async Task<IEnumerable<T>> GetPaginatedAsync(int page, int pageSize)
-        {
-            return await _dbSet.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
-        }
+        public async Task<IEnumerable<T>> GetPaginatedAsync(int page, int pageSize) => await _dbSet.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
     }
 }

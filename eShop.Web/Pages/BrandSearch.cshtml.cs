@@ -5,19 +5,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace eShop.Web.Pages
 {
-    public class BrandSearchModel : PageModel
+    public class BrandSearchModel(IBrandService brandService) : PageModel
     {
-        private readonly IBrandService _brandService;
-
-        public BrandSearchModel(IBrandService brandService)
-        {
-            _brandService = brandService;
-        }
+        private readonly IBrandService _brandService = brandService;
 
         [BindProperty(SupportsGet = true)]
-        public string SearchTerm { get; set; }
+        public string? SearchTerm { get; set; }
 
-        public IEnumerable<Brand> Brands { get; set; }
+        public IEnumerable<Brand>? Brands { get; set; }
 
         public async Task OnGetAsync()
         {

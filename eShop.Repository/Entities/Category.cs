@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using eShop.Repository.IEntity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eShop.Repository.Entities
 {
-    public class Category
+    public class Category : IHasName
     {
         [Column("category_id")]
         public int Id { get; set; }

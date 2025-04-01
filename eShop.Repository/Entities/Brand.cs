@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using eShop.Repository.IEntity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eShop.Repository.Entities
 {
-    public class Brand
+    public class Brand : IHasName
     {
         [Column("brand_id")]
         public int Id { get; set; }
