@@ -9,6 +9,5 @@ namespace eShop.Service.Services.Service
         private readonly IGenericSearchService<Product> _searchService = searchService;
 
         public async Task<IEnumerable<Product>> GetPaginatedSearchAsync(int page, int pageSize, string searchTerm) => await _searchService.GetPaginatedSearchAsync(page, pageSize, searchTerm);
-
     }
 }
