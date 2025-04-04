@@ -1,6 +1,6 @@
 ﻿using eShop.Repository.IEntity;
 
-namespace eShop.Service.Services.Generics.Generic
+namespace eShop.Service.Services.Generics.IGeneric
 {
     public interface IGenericSearchService<T> where T : class, IHasName
     {

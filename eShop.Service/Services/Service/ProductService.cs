@@ -1,13 +1,14 @@
 ﻿using eShop.Repository.Entities;
-using eShop.Service.Services.Generics.Generic;
+using eShop.Service.Services.Generics.IGeneric;
+using eShop.Service.Services.IService;
 
 namespace eShop.Service.Services.Service
 {
-    public class ProductService(IGenericSearchService<Product> personSearchService)
+    public class ProductService(IGenericSearchService<Product> searchService) : IGenericSearchService<Product>, IProductService
     {
-        private readonly IGenericSearchService<Product> _productService = personSearchService;
+        private readonly IGenericSearchService<Product> _searchService = searchService;
 
-        public async Task<IEnumerable<Product>> SearchPeopleAsync(string searchTerm, int page, int pageSize) => await _productService.GetPaginatedSearchAsync(page, pageSize, searchTerm);
+        public async Task<IEnumerable<Product>> GetPaginatedSearchAsync(int page, int pageSize, string searchTerm) => await _searchService.GetPaginatedSearchAsync(page, pageSize, searchTerm);
 
     }
 }

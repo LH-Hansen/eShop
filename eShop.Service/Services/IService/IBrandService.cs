@@ -1,10 +1,9 @@
 ﻿using eShop.Repository.Entities;
-using eShop.Service.Services.Generics.IGenericService;
 
-namespace eShop.Service.Services.IService
+namespace eShop.Service.Services.Service
 {
-    public interface IBrandService : IGenericService<Brand>
+    public interface IBrandService
     {
-        Task<IEnumerable<Brand>> GetPaginatedSearchAsync(int page, int pageSize, string? searchTerm);
+        Task<IEnumerable<Brand>> GetPaginatedSearchAsync(int page, int pageSize, string searchTerm);
     }
 }

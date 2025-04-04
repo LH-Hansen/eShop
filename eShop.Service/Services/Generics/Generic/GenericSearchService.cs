@@ -1,5 +1,5 @@
 ﻿using eShop.Repository.IEntity;
-using eShop.Service.Services.Generics.IGenericService;
+using eShop.Service.Services.Generics.IGeneric;
 
 namespace eShop.Service.Services.Generics.Generic
 {

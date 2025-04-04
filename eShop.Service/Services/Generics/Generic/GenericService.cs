@@ -1,7 +1,7 @@
 ﻿// Ignore Spelling: Serivice
 
 using eShop.Repository.Repositories.Generics.Interface;
-using eShop.Service.Services.Generics.IGenericService;
+using eShop.Service.Services.Generics.IGeneric;
 
 namespace eShop.Service.Services.Generics.Generic
 {
