@@ -1,9 +1,10 @@
-﻿using System.ComponentModel;
+﻿using eShop.Repository.IEntity;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eShop.Repository.Entities
 {
-    public class SubCategory
+    public class SubCategory : IHasName
     {
         [Column("subcategory_id")]
         public int Id { get; set; }

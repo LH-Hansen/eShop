@@ -1,26 +1,13 @@
 ﻿using eShop.Repository.Entities;
-using eShop.Repository.Repositories.Generics.Interface;
-using eShop.Service.Services.Generics.Generic;
+using eShop.Service.Services.Generics.IGeneric;
 using eShop.Service.Services.IService;
 
 namespace eShop.Service.Services.Service
 {
-    public class ProductService : GenericService<Product>, IProductService
+    public class ProductService(IGenericSearchService<Product> searchService) : IGenericSearchService<Product>, IProductService
     {
-        private readonly IGenericRepository<Product> _productRepository;
+        private readonly IGenericSearchService<Product> _searchService = searchService;
 
-        public ProductService(IGenericRepository<Product> productRepository)
-            : base(productRepository)
-        {
-            _productRepository = productRepository;
-        }
-
-        public async Task<IEnumerable<Product>> GetProductsByBrandAsync(int brandId)
-        {
-            return await Task.FromResult(_productRepository
-                                         .GetAllAsync()
-                                         .Result
-                                         .Where(p => p.BrandId == brandId));
-        }
+        public async Task<IEnumerable<Product>> GetPaginatedSearchAsync(int page, int pageSize, string searchTerm) => await _searchService.GetPaginatedSearchAsync(page, pageSize, searchTerm);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace eShop.Service.Services.Generics.IGenericService
+﻿namespace eShop.Service.Services.Generics.IGeneric
 {
     public interface IGenericService<T> where T : class
     {
