@@ -41,7 +41,6 @@ builder.Services.AddScoped<IGenericSearchService<Brand>, GenericSearchService<Br
 builder.Services.AddScoped<IGenericSearchService<SubCategory>, GenericSearchService<SubCategory>>();
 builder.Services.AddScoped<IGenericSearchService<Category>, GenericSearchService<Category>>();
 
-
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();

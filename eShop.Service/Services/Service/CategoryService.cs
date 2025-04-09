@@ -23,39 +23,23 @@ namespace eShop.Service.Services.Service
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<CategoryDto>> GetAllAsync()
-        {
-            IEnumerable<Category> categories = await _repository.GetAllAsync();
-            return _mapper.Map<IEnumerable<CategoryDto>>(categories);
-        }
+        public async Task<IEnumerable<CategoryDto>> GetAllAsync() =>
+            _mapper.Map<IEnumerable<CategoryDto>>(await _repository.GetAllAsync());
 
-        public async Task<CategoryDto> GetByIdAsync(int id)
-        {
-            Category category = await _repository.GetByIdAsync(id);
-            return _mapper.Map<CategoryDto>(category);
-        }
+        public async Task<CategoryDto> GetByIdAsync(int id) =>
+            _mapper.Map<CategoryDto>(await _repository.GetByIdAsync(id));
 
-        public async Task<IEnumerable<CategoryDto>> GetPaginatedSearchAsync(int page, int pageSize, string searchTerm)
-        {
-            IEnumerable<Category> categories = await _searchService.GetPaginatedSearchAsync(page, pageSize, searchTerm);
-            return _mapper.Map<IEnumerable<CategoryDto>>(categories);
-        }
+        public async Task<IEnumerable<CategoryDto>> GetPaginatedSearchAsync(int page, int pageSize, string searchTerm) =>
+            _mapper.Map<IEnumerable<CategoryDto>>(await _searchService.GetPaginatedSearchAsync(page, pageSize, searchTerm));
 
-        public async Task AddAsync(CategoryDto categoryDto)
-        {
-            Category category = _mapper.Map<Category>(categoryDto);
-            await _repository.AddAsync(category);
-        }
+        public async Task AddAsync(CategoryDto categoryDto) =>
+            await _repository.AddAsync(_mapper.Map<Category>(categoryDto));
 
-        public async Task UpdateAsync(CategoryDto categoryDto)
-        {
-            Category category = _mapper.Map<Category>(categoryDto);
-            await _repository.UpdateAsync(category);
-        }
+        public async Task UpdateAsync(CategoryDto categoryDto) =>
+            await _repository.UpdateAsync(_mapper.Map<Category>(categoryDto));
 
-        public async Task DeleteAsync(int id)
-        {
+        public async Task DeleteAsync(int id) =>
             await _repository.DeleteAsync(id);
-        }
+
     }
 }

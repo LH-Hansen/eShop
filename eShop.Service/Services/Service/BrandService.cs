@@ -16,46 +16,22 @@ namespace eShop.Service.Services.Service
         private readonly IGenericRepository<Brand> _repository = repository;
         private readonly IMapper _mapper = mapper;
 
-        public async Task<IEnumerable<BrandDto>> GetAllAsync()
-        {
-            IEnumerable<Brand> brands = await _repository.GetAllAsync();
+        public async Task<IEnumerable<BrandDto>> GetAllAsync() =>
+            _mapper.Map<IEnumerable<BrandDto>>(await _repository.GetAllAsync());
 
-            return _mapper.Map<IEnumerable<BrandDto>>(brands);
-        }
+        public async Task<BrandDto> GetByIdAsync(int id) =>
+            _mapper.Map<BrandDto>(await _repository.GetByIdAsync(id));
 
-        public async Task<BrandDto> GetByIdAsync(int id)
-        {
-            Brand brand = await _repository.GetByIdAsync(id);
+        public async Task<IEnumerable<BrandDto>> GetPaginatedSearchAsync(int page, int pageSize, string searchTerm) =>
+            _mapper.Map<IEnumerable<BrandDto>>(await _searchService.GetPaginatedSearchAsync(page, pageSize, searchTerm));
 
-            return _mapper.Map<BrandDto>(brand);
-        }
+        public async Task AddAsync(BrandDto brandDto) =>
+            await _repository.AddAsync(_mapper.Map<Brand>(brandDto));
 
-        public async Task<IEnumerable<BrandDto>> GetPaginatedSearchAsync(int page, int pageSize, string searchTerm)
-        {
-            IEnumerable<Brand> brands = await _searchService.GetPaginatedSearchAsync(page, pageSize, searchTerm);
+        public async Task UpdateAsync(BrandDto brandDto) =>
+            await _repository.UpdateAsync(_mapper.Map<Brand>(brandDto));
 
-            IEnumerable<BrandDto> brandDtos = _mapper.Map<IEnumerable<BrandDto>>(brands);
-
-            return brandDtos;
-        }
-
-        public async Task AddAsync(BrandDto brandDto)
-        {
-            Brand brand = _mapper.Map<Brand>(brandDto);
-
-            await _repository.AddAsync(brand);
-        }
-
-        public async Task UpdateAsync(BrandDto brandDto)
-        {
-            Brand brand = _mapper.Map<Brand>(brandDto);
-
-            await _repository.UpdateAsync(brand);
-        }
-
-        public async Task DeleteAsync(int id)
-        {
+        public async Task DeleteAsync(int id) =>
             await _repository.DeleteAsync(id);
-        }
     }
 }

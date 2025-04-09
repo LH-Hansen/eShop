@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Threading.Tasks;
+using AutoMapper;
 using eShop.Repository.Entities;
 using eShop.Repository.Repositories.Generics.Interface;
 using eShop.Service.DTO;
@@ -15,46 +16,26 @@ namespace eShop.Service.Services.Service
         private readonly IGenericRepository<Product> _repository = repository;
         private readonly IMapper _mapper = mapper;
 
-        public async Task<IEnumerable<ProductDto>> GetAllAsync()
-        {
-            IEnumerable<Product> products = await _repository.GetAllAsync();
+        public async Task<IEnumerable<ProductDto>> GetAllAsync() =>
+            _mapper.Map<IEnumerable<ProductDto>>(await _repository.GetAllAsync());
 
-            return _mapper.Map<IEnumerable<ProductDto>>(products);
-        }
+        public async Task<ProductDto> GetByIdAsync(int id) =>
+            _mapper.Map<ProductDto>(await _repository.GetByIdAsync(id));
 
-        public async Task<ProductDto> GetByIdAsync(int id)
-        {
-            Product product = await _repository.GetByIdAsync(id);
+        public async Task<IEnumerable<ProductDto>> GetPaginatedSearchAsync(int page, int pageSize, string searchTerm) =>
+            _mapper.Map<IEnumerable<ProductDto>>(await _searchService.GetPaginatedSearchAsync(page, pageSize, searchTerm));
 
-            return _mapper.Map<ProductDto>(product);
-        }
+        public async Task AddAsync(ProductDto productDto) =>
+            await _repository.AddAsync(_mapper.Map<Product>(productDto));
 
-        public async Task<IEnumerable<ProductDto>> GetPaginatedSearchAsync(int page, int pageSize, string searchTerm)
-        {
-            IEnumerable<Product> products = await _searchService.GetPaginatedSearchAsync(page, pageSize, searchTerm);
+        public async Task UpdateAsync(ProductDto productDto) =>
+            await _repository.UpdateAsync(_mapper.Map<Product>(productDto));
 
-            IEnumerable<ProductDto> productDtos = _mapper.Map<IEnumerable<ProductDto>>(products);
-
-            return productDtos;
-        }
-
-        public async Task AddAsync(ProductDto productDto)
-        {
-            Product product = _mapper.Map<Product>(productDto);
-
-            await _repository.AddAsync(product);
-        }
-
-        public async Task UpdateAsync(ProductDto productDto)
-        {
-            Product product = _mapper.Map<Product>(productDto);
-
-            await _repository.UpdateAsync(product);
-        }
-
-        public async Task DeleteAsync(int id)
-        {
+        public async Task DeleteAsync(int id) =>
             await _repository.DeleteAsync(id);
-        }
+
+        public async Task<IEnumerable<ProductDto>> GetProductsByBrandAsync(string brand) =>
+            _mapper.Map<IEnumerable<ProductDto>>((await _repository.GetAllAsync()).Where(p => p.Brand.Name == brand));
+
     }
 }
