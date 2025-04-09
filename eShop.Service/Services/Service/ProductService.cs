@@ -66,8 +66,5 @@ namespace eShop.Service.Services.Service
 
             return productDtos;
         }
-
-
-
     }
 }
