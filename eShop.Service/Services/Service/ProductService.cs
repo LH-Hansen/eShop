@@ -9,7 +9,7 @@ namespace eShop.Service.Services.Service
 {
     public class ProductService(IGenericSearchService<Product> searchService,
                                 IGenericRepository<Product> repository,
-                                IMapper mapper) : GenericSearchService<Product>(searchService, repository), IProductService, IGenericService<Product>, IProductService
+                                IMapper mapper) : GenericSearchService<Product>(searchService, repository), IProductService, IGenericService<Product>
     {
         private readonly IGenericSearchService<Product> _searchService = searchService;
         private readonly IGenericRepository<Product> _repository = repository;
