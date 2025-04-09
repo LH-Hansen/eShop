@@ -2,6 +2,7 @@ using eShop.Repository.Data;
 using eShop.Repository.Entities;
 using eShop.Repository.Repositories.Generics.Generic;
 using eShop.Repository.Repositories.Generics.Interface;
+using eShop.Service.Mapping;
 using eShop.Service.Services.Generics.Generic;
 using eShop.Service.Services.Generics.IGeneric;
 using eShop.Service.Services.IService;
@@ -37,9 +38,13 @@ builder.Services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
 
 builder.Services.AddScoped<IGenericSearchService<Product>, GenericSearchService<Product>>();
 builder.Services.AddScoped<IGenericSearchService<Brand>, GenericSearchService<Brand>>();
+builder.Services.AddScoped<IGenericSearchService<SubCategory>, GenericSearchService<SubCategory>>();
+
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
+builder.Services.AddScoped<ISubCategoryService, SubCategoryService>();
+
 #endregion
 
 
