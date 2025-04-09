@@ -15,46 +15,22 @@ namespace eShop.Service.Services.Service
         private readonly IGenericRepository<SubCategory> _repository = repository;
         private readonly IMapper _mapper = mapper;
 
-        public async Task<IEnumerable<SubCategoryDto>> GetAllAsync()
-        {
-            IEnumerable<SubCategory> subCategories = await _repository.GetAllAsync();
+        public async Task<IEnumerable<SubCategoryDto>> GetAllAsync() =>
+            _mapper.Map<IEnumerable<SubCategoryDto>>(await _repository.GetAllAsync());
 
-            return _mapper.Map<IEnumerable<SubCategoryDto>>(subCategories);
-        }
+        public async Task<SubCategoryDto> GetByIdAsync(int id) =>
+            _mapper.Map<SubCategoryDto>(await _repository.GetByIdAsync(id));
 
-        public async Task<SubCategoryDto> GetByIdAsync(int id)
-        {
-            SubCategory subCategory = await _repository.GetByIdAsync(id);
+        public async Task<IEnumerable<SubCategoryDto>> GetPaginatedSearchAsync(int page, int pageSize, string searchTerm) =>
+            _mapper.Map<IEnumerable<SubCategoryDto>>(await _searchService.GetPaginatedSearchAsync(page, pageSize, searchTerm));
 
-            return _mapper.Map<SubCategoryDto>(subCategory);
-        }
+        public async Task AddAsync(SubCategoryDto subCategoryDto) =>
+            await _repository.AddAsync(_mapper.Map<SubCategory>(subCategoryDto));
 
-        public async Task<IEnumerable<SubCategoryDto>> GetPaginatedSearchAsync(int page, int pageSize, string searchTerm)
-        {
-            IEnumerable<SubCategory> subCategories = await _searchService.GetPaginatedSearchAsync(page, pageSize, searchTerm);
+        public async Task UpdateAsync(SubCategoryDto subCategoryDto) =>
+            await _repository.UpdateAsync(_mapper.Map<SubCategory>(subCategoryDto));
 
-            IEnumerable<SubCategoryDto> subCategoryDtos = _mapper.Map<IEnumerable<SubCategoryDto>>(subCategories);
-
-            return subCategoryDtos;
-        }
-
-        public async Task AddAsync(SubCategoryDto subCategoryDto)
-        {
-            SubCategory subCategory = _mapper.Map<SubCategory>(subCategoryDto);
-
-            await _repository.AddAsync(subCategory);
-        }
-
-        public async Task UpdateAsync(SubCategoryDto subCategoryDto)
-        {
-            SubCategory subCategory = _mapper.Map<SubCategory>(subCategoryDto);
-
-            await _repository.UpdateAsync(subCategory);
-        }
-
-        public async Task DeleteAsync(int id)
-        {
+        public async Task DeleteAsync(int id) =>
             await _repository.DeleteAsync(id);
-        }
     }
 }

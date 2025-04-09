@@ -11,40 +11,22 @@ namespace eShop.Service.Services.Service
         private readonly IGenericRepository<Review> _reviewRepository = reviewRepository;
         private readonly IMapper _mapper = mapper;
 
-        public async Task<IEnumerable<ReviewDto>> GetAllAsync()
-        {
-            IEnumerable<Review> reviews = await _reviewRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<ReviewDto>>(reviews);
-        }
+        public async Task<IEnumerable<ReviewDto>> GetAllAsync() =>
+            _mapper.Map<IEnumerable<ReviewDto>>(await _reviewRepository.GetAllAsync());
 
-        public async Task<ReviewDto> GetByIdAsync(int id)
-        {
-            Review review = await _reviewRepository.GetByIdAsync(id);
-            return _mapper.Map<ReviewDto>(review);
-        }
+        public async Task<ReviewDto> GetByIdAsync(int id) =>
+            _mapper.Map<ReviewDto>(await _reviewRepository.GetByIdAsync(id));
 
-        public async Task AddAsync(ReviewDto reviewDto)
-        {
-            Review review = _mapper.Map<Review>(reviewDto);
-            await _reviewRepository.AddAsync(review);
-        }
+        public async Task AddAsync(ReviewDto reviewDto) =>
+            await _reviewRepository.AddAsync(_mapper.Map<Review>(reviewDto));
 
-        public async Task UpdateAsync(ReviewDto reviewDto)
-        {
-            Review review = _mapper.Map<Review>(reviewDto);
-            await _reviewRepository.UpdateAsync(review);
-        }
+        public async Task UpdateAsync(ReviewDto reviewDto) =>
+            await _reviewRepository.UpdateAsync(_mapper.Map<Review>(reviewDto));
 
-        public async Task DeleteAsync(int id)
-        {
+        public async Task DeleteAsync(int id) =>
             await _reviewRepository.DeleteAsync(id);
-        }
 
-        public async Task<IEnumerable<ReviewDto>> GetByProductIdAsync(int productId)
-        {
-            IEnumerable<Review> reviews = await _reviewRepository.GetAllAsync();
-            IEnumerable<Review> filteredReviews = reviews.Where(r => r.ProductId == productId);
-            return _mapper.Map<IEnumerable<ReviewDto>>(filteredReviews);
-        }
+        public async Task<IEnumerable<ReviewDto>> GetByProductIdAsync(int productId) =>
+            _mapper.Map<IEnumerable<ReviewDto>>((await _reviewRepository.GetAllAsync()).Where(r => r.ProductId == productId));
     }
 }

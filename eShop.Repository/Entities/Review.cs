@@ -13,7 +13,7 @@ namespace eShop.Repository.Entities
         public string? Body { get; set; }
 
         [Column("FK_product_id")]
-        public int ProductId { get; set; }
-        public required Product Product { get; set; }
+        public required int ProductId { get; set; }
+        public Product Product { get; set; }
     }
 }

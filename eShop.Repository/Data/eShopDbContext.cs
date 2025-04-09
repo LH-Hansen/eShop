@@ -12,13 +12,13 @@ namespace eShop.Repository.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=eShop;Trusted_Connection=True;");
-            }
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=eShop;Trusted_Connection=True;");
+        //    }
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -69,6 +69,37 @@ namespace eShop.Repository.Data
             modelBuilder.Entity<Order>().HasData(
                 new Order { Id = 1, OrderDate = orderDate1, TotalAmount = 2799.98 },
                 new Order { Id = 2, OrderDate = orderDate2, TotalAmount = 899.99 }
+            );
+
+            modelBuilder.Entity<Review>().HasData(
+                new Review
+                {
+                    Id = 1,
+                    Title = "Great iPhone!",
+                    Body = "This is the best iPhone I've ever owned. The performance is top-notch.",
+                    ProductId = 1
+                },
+                new Review
+                {
+                    Id = 2,
+                    Title = "Decent phone but battery could be better",
+                    Body = "The phone is great overall, but I wish the battery lasted longer.",
+                    ProductId = 2
+                },
+                new Review
+                {
+                    Id = 3,
+                    Title = "Good TV, but sound quality lacking",
+                    Body = "The picture quality is excellent, but the sound could use improvement.",
+                    ProductId = 3
+                },
+                new Review
+                {
+                    Id = 4,
+                    Title = "Amazing TV, worth the price",
+                    Body = "The picture is stunning, and the price is justifiable for the quality.",
+                    ProductId = 4
+                }
             );
         }
     }

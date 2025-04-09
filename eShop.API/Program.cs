@@ -19,12 +19,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
+builder.Services.AddMemoryCache();
 
 #if DEBUG
 builder.Services.AddDbContext<EShopDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Development"));
-});
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Development")));
+
 #else
 builder.Services.AddDbContext<EShopDbContext>(options =>
 {
@@ -41,7 +41,6 @@ builder.Services.AddScoped<IGenericSearchService<Brand>, GenericSearchService<Br
 builder.Services.AddScoped<IGenericSearchService<SubCategory>, GenericSearchService<SubCategory>>();
 builder.Services.AddScoped<IGenericSearchService<Category>, GenericSearchService<Category>>();
 
-
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
@@ -56,6 +55,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }

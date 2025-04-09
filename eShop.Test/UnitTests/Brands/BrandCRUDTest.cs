@@ -1,4 +1,5 @@
 ﻿using eShop.Repository.Entities;
+using eShop.Service.DTO;
 using eShop.Service.Services.IService;
 using Moq;
 
@@ -17,16 +18,16 @@ namespace eShop.Test.UnitTests.Brands
         public async Task GetAllAsyncTest()
         {
             // Arrange
-            List<Brand> brands =
+            List<BrandDto> brands =
             [
-                new Brand { Id = 1, Name = "Brand 1" },
-                new Brand { Id = 2, Name = "Brand 2" }
+                new BrandDto { Id = 1, Name = "Brand 1" },
+                new BrandDto { Id = 2, Name = "Brand 2" }
             ];
 
             _mockBrandService.Setup(service => service.GetAllAsync()).ReturnsAsync(brands);
 
             // Act
-            IEnumerable<Brand> result = await _mockBrandService.Object.GetAllAsync();
+            IEnumerable<BrandDto> result = await _mockBrandService.Object.GetAllAsync();
 
             // Assert
             Assert.NotNull(result);
@@ -39,11 +40,11 @@ namespace eShop.Test.UnitTests.Brands
         public async Task GetByIdAsyncTest()
         {
             // Arrange
-            Brand brand = new() { Id = 1, Name = "Brand 1" };
+            BrandDto brand = new() { Id = 1, Name = "Brand 1" };
             _mockBrandService.Setup(service => service.GetByIdAsync(1)).ReturnsAsync(brand);
 
             // Act
-            Brand result = await _mockBrandService.Object.GetByIdAsync(1);
+            BrandDto result = await _mockBrandService.Object.GetByIdAsync(1);
 
             // Assert
             Assert.NotNull(result);
@@ -54,28 +55,28 @@ namespace eShop.Test.UnitTests.Brands
         public async Task AddAsyncTest()
         {
             // Arrange
-            Brand newBrand = new() { Id = 3, Name = "Brand 3" };
-            _mockBrandService.Setup(service => service.AddAsync(It.IsAny<Brand>())).Returns(Task.CompletedTask);
+            BrandDto newBrand = new() { Id = 3, Name = "Brand 3" };
+            _mockBrandService.Setup(service => service.AddAsync(It.IsAny<BrandDto>())).Returns(Task.CompletedTask);
 
             // Act
             await _mockBrandService.Object.AddAsync(newBrand);
 
             // Assert
-            _mockBrandService.Verify(service => service.AddAsync(It.Is<Brand>(b => b.Name == "Brand 3")), Times.Once);
+            _mockBrandService.Verify(service => service.AddAsync(It.Is<BrandDto>(b => b.Name == "Brand 3")), Times.Once);
         }
 
         [Fact]
         public async Task UpdateAsyncTest()
         {
             // Arrange
-            Brand existingBrand = new() { Id = 1, Name = "Brand 1" };
-            _mockBrandService.Setup(service => service.UpdateAsync(It.IsAny<Brand>())).Returns(Task.CompletedTask);
+            BrandDto existingBrand = new() { Id = 1, Name = "Brand 1" };
+            _mockBrandService.Setup(service => service.UpdateAsync(It.IsAny<BrandDto>())).Returns(Task.CompletedTask);
 
             // Act
             await _mockBrandService.Object.UpdateAsync(existingBrand);
 
             // Assert
-            _mockBrandService.Verify(service => service.UpdateAsync(It.Is<Brand>(b => b.Id == 1 && b.Name == "Brand 1")), Times.Once);
+            _mockBrandService.Verify(service => service.UpdateAsync(It.Is<BrandDto>(b => b.Id == 1 && b.Name == "Brand 1")), Times.Once);
         }
 
         [Fact]
@@ -83,7 +84,7 @@ namespace eShop.Test.UnitTests.Brands
         {
             // Arrange
             int brandIdToDelete = 1;
-            Brand brandToDelete = new() { Id = brandIdToDelete, Name = "Brand 1" };
+            BrandDto brandToDelete = new() { Id = brandIdToDelete, Name = "Brand 1" };
 
             _mockBrandService.Setup(service => service.DeleteAsync(brandIdToDelete))
                              .Returns(Task.CompletedTask);
@@ -93,7 +94,7 @@ namespace eShop.Test.UnitTests.Brands
 
             // Assert:
 
-            Brand deletedBrand = await _mockBrandService.Object.GetByIdAsync(brandIdToDelete);
+            BrandDto deletedBrand = await _mockBrandService.Object.GetByIdAsync(brandIdToDelete);
 
             Assert.Null(deletedBrand);
         }
