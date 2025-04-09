@@ -1,4 +1,5 @@
 using eShop.Repository.Entities;
+using eShop.Service.DTO;
 using eShop.Service.Services.IService;
 using FluentAssertions;
 using Moq;
@@ -38,13 +39,10 @@ namespace eShop.Test.UnitTests.Brands
                 new() { Id = 10, Name = "Brand 10" }
             ];
 
-            _mockBrandService.Setup(service => service.GetPaginatedSearchAsync(page, pageSize, searchTerm))
-                             .ReturnsAsync(allBrands.Skip((page - 1) * pageSize)
-                             .Take(pageSize)
-                             .ToList());
+            _mockBrandService.Setup(service => service.GetPaginatedSearchAsync(page, pageSize, searchTerm));
 
             // Act
-            IEnumerable<Brand> brands = await _mockBrandService.Object.GetPaginatedSearchAsync(page, pageSize, searchTerm);
+            IEnumerable<BrandDto> brands = await _mockBrandService.Object.GetPaginatedSearchAsync(page, pageSize, searchTerm);
 
             /// Assert
             brands.Should().HaveCount(pageSize);
