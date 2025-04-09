@@ -4,7 +4,7 @@ using eShop.Repository.Entities;
 
 namespace eShop.Service.DTO
 {
-    public class BrandDTO
+    public class BrandDto
     {
         public int Id { get; set; }
         public required string Name { get; set; }

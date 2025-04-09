@@ -1,4 +1,5 @@
-﻿using eShop.Repository.Entities;
+﻿using AutoMapper;
+using eShop.Repository.Entities;
 using eShop.Repository.Repositories.Generics.Interface;
 using eShop.Service.DTO;
 using eShop.Service.Services.Generics.Generic;
@@ -7,60 +8,54 @@ using eShop.Service.Services.IService;
 
 namespace eShop.Service.Services.Service
 {
-    public class BrandService : GenericSearchService<Brand>, IBrandService, IGenericService<Brand>
+    public class BrandService(IGenericSearchService<Brand> searchService,
+                        IGenericRepository<Brand> repository,
+                        IMapper mapper) : GenericSearchService<Brand>(searchService, repository), IBrandService, IGenericService<Brand>
     {
-        private readonly IGenericSearchService<Brand> _searchService;
+        private readonly IGenericSearchService<Brand> _searchService = searchService;
+        private readonly IGenericRepository<Brand> _repository = repository;
+        private readonly IMapper _mapper = mapper;
 
-        public BrandService(IGenericSearchService<Brand> searchService, IGenericRepository<Brand> repository) : base(searchService, repository)
+        public async Task<IEnumerable<BrandDto>> GetAllAsync()
         {
-            _searchService = searchService;
+            IEnumerable<Brand> brands = await _repository.GetAllAsync();
+
+            return _mapper.Map<IEnumerable<BrandDto>>(brands);
         }
 
-        public async Task<IEnumerable<BrandDTO>> GetPaginatedSearchAsync(int page, int pageSize, string searchTerm)
+        public async Task<BrandDto> GetByIdAsync(int id)
+        {
+            Brand brand = await _repository.GetByIdAsync(id);
+
+            return _mapper.Map<BrandDto>(brand);
+        }
+
+        public async Task<IEnumerable<BrandDto>> GetPaginatedSearchAsync(int page, int pageSize, string searchTerm)
         {
             IEnumerable<Brand> brands = await _searchService.GetPaginatedSearchAsync(page, pageSize, searchTerm);
 
-            return brands.Select(brand => new BrandDTO
-            {
-                Id = brand.Id,
-                Name = brand.Name
-            });
+            IEnumerable<BrandDto> brandDtos = _mapper.Map<IEnumerable<BrandDto>>(brands);
+
+            return brandDtos;
         }
 
-        public async Task<IEnumerable<BrandDTO>> GetAllAsync()
+        public async Task AddAsync(BrandDto brandDto)
         {
-            var brands = await _searchService.GetAllAsync();
+            Brand brand = _mapper.Map<Brand>(brandDto);
 
-            return brands.Select(brand => new BrandDTO
-            {
-                Id = brand.Id,
-                Name = brand.Name
-            });
+            await _repository.AddAsync(brand);
         }
 
-
-        private static BrandDTO ReturnDTO(Brand brand)
+        public async Task UpdateAsync(BrandDto brandDto)
         {
-            return new BrandDTO
-            {
-                Id = brand.Id,
-                Name = brand.Name,
-                Description = brand.Description,
-                Products = brand.Products,
-            };
+            Brand brand = _mapper.Map<Brand>(brandDto);
+
+            await _repository.UpdateAsync(brand);
         }
 
-        private static Brand ConvertBrand(BrandDTO brandDTO)
+        public async Task DeleteAsync(int id)
         {
-            return new Brand
-            {
-                Id = brandDTO.Id,
-                Name = brandDTO.Name,
-                Description = brandDTO.Description,
-                Products = brandDTO.Products,
-            };
+            await _repository.DeleteAsync(id);
         }
-
-
     }
 }

@@ -8,10 +8,10 @@ namespace eShop.Service.Services.Service
     {
         public MappingProfile()
         {
-            CreateMap<Brand, BrandDTO>();
+            CreateMap<Brand, BrandDto>();
 
 
-            CreateMap<BrandDTO, Brand>();
+            CreateMap<BrandDto, Brand>();
         }
 
 

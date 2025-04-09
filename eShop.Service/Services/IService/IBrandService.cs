@@ -1,11 +1,14 @@
-﻿using eShop.Repository.Entities;
-using eShop.Service.DTO;
-using eShop.Service.Services.Generics.IGeneric;
+﻿using eShop.Service.DTO;
 
 namespace eShop.Service.Services.IService
 {
-    public interface IBrandService : IGenericSearchService<Brand>, IGenericService<Brand>
+    public interface IBrandService
     {
-        Task<IEnumerable<BrandDTO>> GetPaginatedSearchAsync(int page, int pageSize, string searchTerm);
+        Task AddAsync(BrandDto brandDto);
+        Task DeleteAsync(int id);
+        Task<IEnumerable<BrandDto>> GetAllAsync();
+        Task<BrandDto> GetByIdAsync(int id);
+        Task<IEnumerable<BrandDto>> GetPaginatedSearchAsync(int page, int pageSize, string searchTerm);
+        Task UpdateAsync(BrandDto brandDto);
     }
 }
