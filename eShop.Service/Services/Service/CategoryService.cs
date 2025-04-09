@@ -7,7 +7,7 @@ using eShop.Service.Services.Generics.IGeneric;
 
 namespace eShop.Service.Services.Service
 {
-    public class CategoryService : GenericSearchService<Category>, ICategoryService, IGenericService<Category>, ICategoryService
+    public class CategoryService : GenericSearchService<Category>, ICategoryService, IGenericService<Category>
     {
         private readonly IGenericSearchService<Category> _searchService;
         private readonly IGenericRepository<Category> _repository;
