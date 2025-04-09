@@ -190,8 +190,10 @@ This project follows [Semantic Versioning](https://semver.org/) for version cont
 ### Changelog
 
 #### [Unreleased]
-- Add Product
-- Fix bug pagination bug
+
+#### [0.3.0] - 2025-04-09
+- Added Product, Reviews, Category, Subcategory.
+- Implemented endpoints with CRUD functionality.
 
 ### [0.3.0] - 2025-03-27
 - Added CRUD unitTest for Brand.
