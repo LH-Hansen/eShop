@@ -1,6 +1,4 @@
-﻿using eShop.Repository.Entities;
-
-namespace eShop.Service.DTO
+﻿namespace eShop.Service.DTO
 {
     public class ReviewDto
     {
@@ -8,6 +6,6 @@ namespace eShop.Service.DTO
         public required string Title { get; set; }
         public string? Body { get; set; }
         public int ProductId { get; set; }
-        public required Product Product { get; set; }
+        public required ProductDto Product { get; set; }
     }
 }

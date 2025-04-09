@@ -6,7 +6,7 @@ namespace eShop.API.Controllers
 {
     [Route("rest/v1/[controller]")]
     [ApiController]
-    public class SubCategoryController(ISubCategoryService subCategoryService) : ControllerBase
+    public class SubCategoriesController(ISubCategoryService subCategoryService) : ControllerBase
     {
         private readonly ISubCategoryService _subCategoryService = subCategoryService;
 

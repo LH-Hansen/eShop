@@ -1,6 +1,4 @@
-﻿using eShop.Repository.Entities;
-
-namespace eShop.Service.DTO
+﻿namespace eShop.Service.DTO
 {
     public class CategoryDto
     {
@@ -8,6 +6,6 @@ namespace eShop.Service.DTO
         public required string Name { get; set; }
         public string? Description { get; set; }
         public int SubCategoryId { get; set; }
-        public ICollection<SubCategory>? SubCategories { get; set; }
+        public ICollection<SubCategoryDto>? SubCategories { get; set; }
     }
 }

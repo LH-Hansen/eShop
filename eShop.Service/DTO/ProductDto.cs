@@ -1,6 +1,4 @@
-﻿using eShop.Repository.Entities;
-
-namespace eShop.Service.DTO
+﻿namespace eShop.Service.DTO
 {
     public class ProductDto
     {
@@ -10,9 +8,9 @@ namespace eShop.Service.DTO
         public string? Description { get; set; }
         public int Stock { get; set; } = 0;
         public int BrandId { get; set; }
-        public Brand? Brand { get; set; }
+        public BrandDto? Brand { get; set; }
         public int SubCategoryId { get; set; }
-        public SubCategory SubCategory { get; set; } = null!;
-        public ICollection<Review>? Reviews { get; set; }
+        public SubCategoryDto SubCategory { get; set; } = null!;
+        public ICollection<ReviewDto>? Reviews { get; set; }
     }
 }
