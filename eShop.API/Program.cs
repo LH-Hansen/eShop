@@ -39,10 +39,13 @@ builder.Services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
 builder.Services.AddScoped<IGenericSearchService<Product>, GenericSearchService<Product>>();
 builder.Services.AddScoped<IGenericSearchService<Brand>, GenericSearchService<Brand>>();
 builder.Services.AddScoped<IGenericSearchService<SubCategory>, GenericSearchService<SubCategory>>();
+builder.Services.AddScoped<IGenericSearchService<Category>, GenericSearchService<Category>>();
 
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ISubCategoryService, SubCategoryService>();
 
 #endregion
