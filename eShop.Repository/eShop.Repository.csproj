@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+	  <OutputType>Library</OutputType>
+	  <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -14,6 +14,11 @@
     <EmbeddedResource Remove="Repositories\Repository\**" />
     <None Remove="Repositories\IRepository\**" />
     <None Remove="Repositories\Repository\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20250326102803_InitialCreate.cs" />
+    <Compile Remove="Data\Migrations\20250326102803_InitialCreate.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

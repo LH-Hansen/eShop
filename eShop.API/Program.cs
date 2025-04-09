@@ -23,9 +23,8 @@ builder.Services.AddMemoryCache();
 
 #if DEBUG
 builder.Services.AddDbContext<EShopDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Development"));
-});
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Development")));
+
 #else
 builder.Services.AddDbContext<EShopDbContext>(options =>
 {
@@ -56,6 +55,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
