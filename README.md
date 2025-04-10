@@ -244,9 +244,6 @@ This project depends on the following libraries:
 - The `id` parameters refer to the specific identifier for products, brands, categories, reviews, or subcategories.
 - Pagination for GET requests with search functionality can be controlled with `page`, `pageSize`, and `searchTerm` parameters.
 
----
-
-This README table can be copy-pasted directly into your `README.md` file, and it will render as a nice documentation for your API endpoints in Markdown format!
 
 
 
