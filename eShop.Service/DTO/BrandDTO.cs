@@ -1,5 +1,7 @@
 ﻿// Ignore Spelling: DTO
 
+using eShop.Service.DTO.Product;
+
 namespace eShop.Service.DTO
 {
     public class BrandDto

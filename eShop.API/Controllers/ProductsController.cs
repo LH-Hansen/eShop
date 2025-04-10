@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using eShop.Service.DTO;
+using eShop.Service.DTO.Product;
 using eShop.Service.Services.Service;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,18 +21,18 @@ namespace eShop.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllProducts()
         {
-            var products = await _productService.GetAllAsync();
+            IEnumerable<ProductDto> products = await _productService.GetAllAsync();
             return Ok(products);
         }
 
-        [HttpGet("{name}")]
-        public async Task<IActionResult> GetPaginatedProducts(int page = 1, int pageSize = 10, string searchTerm = "")
+        [HttpGet("search/{ProductName}")]
+        public async Task<IActionResult> GetPaginatedProducts(string ProductName)
         {
-            IEnumerable<ProductDto> products = await _productService.GetPaginatedSearchAsync(page, pageSize, searchTerm);
+            IEnumerable<ProductDto> products = await _productService.GetPaginatedSearchAsync(1, 10, ProductName);
             return Ok(products);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetProductById(int id)
         {
             ProductDto product = await _productService.GetByIdAsync(id);
@@ -40,23 +40,18 @@ namespace eShop.API.Controllers
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> AddProduct([FromBody] ProductDto productDto)
+        public async Task<IActionResult> AddProduct([FromBody] ProductUpsertDto productDto)
         {
             if (productDto == null)
-            {
                 return BadRequest("Product data is required.");
-            }
+
             await _productService.AddAsync(productDto);
-            return CreatedAtAction(nameof(GetProductById), new { id = productDto.Id }, productDto);
+            return CreatedAtAction(nameof(AddProduct), productDto);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductDto productDto)
+        public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductUpsertDto productDto)
         {
-            if (id != productDto.Id)
-            {
-                return BadRequest("Product ID mismatch.");
-            }
             await _productService.UpdateAsync(productDto);
             return NoContent();
         }
@@ -67,5 +62,9 @@ namespace eShop.API.Controllers
             await _productService.DeleteAsync(id);
             return NoContent();
         }
+
+        [HttpGet("brand/{brandId}")]
+        public async Task<IEnumerable<ProductUpsertDto>> GetByBrandIdAsync(int brandId) =>
+            _mapper.Map<IEnumerable<ProductUpsertDto>>((await _productService.GetProductsByBrandAsync(brandId)));
     }
 }

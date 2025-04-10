@@ -1,6 +1,7 @@
 ﻿using eShop.Repository.Data;
 using eShop.Repository.Repositories.Generics.Interface;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace eShop.Repository.Repositories.Generics.Generic
 {
@@ -15,9 +16,34 @@ namespace eShop.Repository.Repositories.Generics.Generic
             _dbSet = _dbContext.Set<T>();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.ToListAsync();
+        public async Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = _dbSet;
 
-        public async Task<T> GetByIdAsync(int id) => await _dbSet.FindAsync(id) ?? throw new KeyNotFoundException($"Brand with id {id} not found.");
+            foreach (var include in includes)
+                query = query.Include(include);
+
+            return await query.ToListAsync();
+        }
+
+
+        public async Task<T> GetByIdAsync(int id, params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = _dbSet;
+
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+
+            var entity = await query.FirstOrDefaultAsync(e => EF.Property<int>(e, "Id") == id);
+
+            if (entity == null)
+                throw new KeyNotFoundException($"Entity with id {id} not found.");
+
+            return entity;
+        }
+
 
         public async Task AddAsync(T entity)
         {

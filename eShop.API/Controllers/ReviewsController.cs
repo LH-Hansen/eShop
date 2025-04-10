@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using eShop.Service.DTO;
+using eShop.Service.DTO.Review;
 using eShop.Service.Services.IService;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,7 +37,7 @@ namespace eShop.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddReview([FromBody] ReviewDto reviewDto)
+        public async Task<IActionResult> AddReview([FromBody] ReviewUpsertDto reviewDto)
         {
             if (reviewDto == null)
             {
@@ -45,17 +45,12 @@ namespace eShop.API.Controllers
             }
 
             await _reviewService.AddAsync(reviewDto);
-            return CreatedAtAction(nameof(GetReviewById), new { id = reviewDto.Id }, reviewDto);
+            return CreatedAtAction(nameof(AddReview), reviewDto);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateReview(int id, [FromBody] ReviewDto reviewDto)
+        public async Task<IActionResult> UpdateReview(int id, [FromBody] ReviewUpsertDto reviewDto)
         {
-            if (id != reviewDto.Id)
-            {
-                return BadRequest("Review ID mismatch.");
-            }
-
             await _reviewService.UpdateAsync(reviewDto);
             return NoContent();
         }
