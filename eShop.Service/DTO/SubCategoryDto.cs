@@ -1,4 +1,6 @@
-﻿namespace eShop.Service.DTO
+﻿using eShop.Service.DTO.Product;
+
+namespace eShop.Service.DTO
 {
     public class SubCategoryDto
     {
