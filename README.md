@@ -15,6 +15,7 @@
 - [Diagrams](#-diagrams)
 - [Framework](#%EF%B8%8F-framework)
 - [Dependencies](#-dependencies)
+- [API DOcumentation](#-api-documentation)
 - [Versioning & Changelog](#-versioning-and-changelog)
 - [TODO](#-todo-list)
 - [Known Issues](#-known-issues)
@@ -184,10 +185,11 @@ This project depends on the following libraries:
 | `GET`           | `/products`                   | Get all products                                     | None                              | None                   | `200 OK` with list of `ProductDto`         |
 | `GET`           | `/products/search/{ProductName}`| Get paginated products by product name               | `ProductName` (string)            | None                   | `200 OK` with list of `ProductDto`         |
 | `GET`           | `/products/{id}`               | Get product by ID                                    | `id` (int)                        | None                   | `200 OK` with `ProductDto`                 |
+| `GET`           | `/products/brand/{brandId}`    | Get products by brand ID                             | `brandId` (int)                   | None                   | `200 OK` with list of `ProductUpsertDto`  |
 | `POST`          | `/products`                   | Add a new product                                    | None                              | `ProductUpsertDto`     | `201 Created` with `ProductUpsertDto`      |
 | `PUT`           | `/products/{id}`               | Update an existing product                           | `id` (int)                        | `ProductUpsertDto`     | `204 No Content`                          |
 | `DELETE`        | `/products/{id}`               | Delete a product                                     | `id` (int)                        | None                   | `204 No Content`                          |
-| `GET`           | `/products/brand/{brandId}`    | Get products by brand ID                             | `brandId` (int)                   | None                   | `200 OK` with list of `ProductUpsertDto`  |
+
 
 ## Brand Endpoints
 
@@ -200,6 +202,18 @@ This project depends on the following libraries:
 | `PUT`           | `/brands/{id}`                | Update an existing brand                             | `id` (int)                        | `BrandDto`             | `204 No Content`                          |
 | `DELETE`        | `/brands/{id}`                | Delete a brand                                       | `id` (int)                        | None                   | `204 No Content`                          |
 
+## Review Endpoints
+
+| **HTTP Method** | **Route**                     | **Description**                                      | **Parameters**                    | **Request Body**       | **Response**                               |
+|-----------------|-------------------------------|------------------------------------------------------|-----------------------------------|------------------------|--------------------------------------------|
+| `GET`           | `/reviews`                    | Get all reviews                                      | None                              | None                   | `200 OK` with list of `ReviewDto`          |
+| `GET`           | `/reviews/{id}`               | Get review by ID                                     | `id` (int)                        | None                   | `200 OK` with `ReviewDto`                  |
+| `GET`           | `/reviews/byProduct/{productId}`| Get reviews by product ID                            | `productId` (int)                 | None                   | `200 OK` with list of `ReviewDto`    
+| `POST`          | `/reviews`                    | Add a new review                                     | None                              | `ReviewUpsertDto`      | `201 Created` with `ReviewUpsertDto`       |
+| `PUT`           | `/reviews/{id}`               | Update an existing review                            | `id` (int)                        | `ReviewUpsertDto`      | `204 No Content`                          |
+| `DELETE`        | `/reviews/{id}`               | Delete a review                                      | `id` (int)                        | None                   | `204 No Content`                          |
+      |
+
 ## Category Endpoints
 
 | **HTTP Method** | **Route**                     | **Description**                                      | **Parameters**                    | **Request Body**       | **Response**                               |
@@ -211,16 +225,7 @@ This project depends on the following libraries:
 | `PUT`           | `/categories/{id}`            | Update an existing category                          | `id` (int)                        | `CategoryDto`          | `204 No Content`                          |
 | `DELETE`        | `/categories/{id}`            | Delete a category                                    | `id` (int)                        | None                   | `204 No Content`                          |
 
-## Review Endpoints
 
-| **HTTP Method** | **Route**                     | **Description**                                      | **Parameters**                    | **Request Body**       | **Response**                               |
-|-----------------|-------------------------------|------------------------------------------------------|-----------------------------------|------------------------|--------------------------------------------|
-| `GET`           | `/reviews`                    | Get all reviews                                      | None                              | None                   | `200 OK` with list of `ReviewDto`          |
-| `GET`           | `/reviews/{id}`               | Get review by ID                                     | `id` (int)                        | None                   | `200 OK` with `ReviewDto`                  |
-| `POST`          | `/reviews`                    | Add a new review                                     | None                              | `ReviewUpsertDto`      | `201 Created` with `ReviewUpsertDto`       |
-| `PUT`           | `/reviews/{id}`               | Update an existing review                            | `id` (int)                        | `ReviewUpsertDto`      | `204 No Content`                          |
-| `DELETE`        | `/reviews/{id}`               | Delete a review                                      | `id` (int)                        | None                   | `204 No Content`                          |
-| `GET`           | `/reviews/byProduct/{productId}`| Get reviews by product ID                            | `productId` (int)                 | None                   | `200 OK` with list of `ReviewDto`          |
 
 ## SubCategory Endpoints
 
@@ -262,6 +267,10 @@ This project follows [Semantic Versioning](https://semver.org/) for version cont
 ### Changelog
 
 #### [Unreleased]
+
+#### [0.4.0] - 2025-04-10
+- Added unit tests
+- Added API with endpoints
 
 #### [0.3.0] - 2025-04-09
 - Added Product, Reviews, Category, Subcategory.
