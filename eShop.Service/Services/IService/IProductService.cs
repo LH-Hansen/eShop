@@ -1,17 +1,10 @@
 ﻿using eShop.Service.DTO.Product;
+using eShop.Service.Services.Generics.IGeneric;
 
-namespace eShop.Service.Services.Service
+namespace eShop.Service.Services.IService
 {
-    public interface IProductService
+    public interface IProductService : IGenericDtoSearchService<ProductDto>
     {
-        Task AddAsync(ProductUpsertDto productDto);
-        Task DeleteAsync(int id);
-        Task<IEnumerable<ProductDto>> GetAllAsync();
-        Task<ProductDto> GetByIdAsync(int id);
-        Task<IEnumerable<ProductDto>> GetPaginatedSearchAsync(int page, int pageSize, string searchTerm);
-        Task UpdateAsync(ProductUpsertDto productDto);
-        Task<IEnumerable<ProductUpsertDto>> GetProductsByBrandAsync(int id);
-
-
+        Task<IEnumerable<ProductDto>> GetProductsByBrandAsync(int brandId);
     }
 }

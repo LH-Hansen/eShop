@@ -18,4 +18,8 @@
     <ProjectReference Include="..\eShop.Service\eShop.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\BaseControllers\" />
+  </ItemGroup>
+
 </Project>

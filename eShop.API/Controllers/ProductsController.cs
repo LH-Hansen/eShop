@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using eShop.Repository.Entities;
 using eShop.Service.DTO.Product;
-using eShop.Service.Services.Service;
+using eShop.Service.Services.Generics.IGeneric;
+using eShop.Service.Services.IService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eShop.API.Controllers
@@ -9,11 +11,14 @@ namespace eShop.API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
+        private readonly IGenericDtoService<Product, ProductDto, ProductUpsertDto> _genericService;
         private readonly IProductService _productService;
+
         private readonly IMapper _mapper;
 
-        public ProductsController(IProductService productService, IMapper mapper)
+        public ProductsController(IGenericDtoService<Product, ProductDto, ProductUpsertDto> genericService, IProductService productService, IMapper mapper)
         {
+            _genericService = genericService;
             _productService = productService;
             _mapper = mapper;
         }
@@ -21,7 +26,7 @@ namespace eShop.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllProducts()
         {
-            IEnumerable<ProductDto> products = await _productService.GetAllAsync();
+            IEnumerable<ProductDto> products = await _genericService.GetAllAsync();
             return Ok(products);
         }
 
@@ -35,7 +40,7 @@ namespace eShop.API.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetProductById(int id)
         {
-            ProductDto product = await _productService.GetByIdAsync(id);
+            ProductDto product = await _genericService.GetByIdAsync(id);
             return Ok(product);
         }
 
@@ -45,21 +50,21 @@ namespace eShop.API.Controllers
             if (productDto == null)
                 return BadRequest("Product data is required.");
 
-            await _productService.AddAsync(productDto);
+            await _genericService.AddAsync(productDto);
             return CreatedAtAction(nameof(AddProduct), productDto);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductUpsertDto productDto)
         {
-            await _productService.UpdateAsync(productDto);
+            await _genericService.UpdateAsync(productDto);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
-            await _productService.DeleteAsync(id);
+            await _genericService.DeleteAsync(id);
             return NoContent();
         }
 
