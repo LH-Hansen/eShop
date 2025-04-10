@@ -173,6 +173,78 @@ This project depends on the following libraries:
 | [Moq](https://www.nuget.org/packages/Moq)                                     | Daniel Cazzulino, kzu | `4.20.72`| eShop.Test |
 <br>
 
+## API Docuemntation
+
+# API Endpoints Documentation
+
+## Product Endpoints
+
+| **HTTP Method** | **Route**                     | **Description**                                      | **Parameters**                    | **Request Body**       | **Response**                               |
+|-----------------|-------------------------------|------------------------------------------------------|-----------------------------------|------------------------|--------------------------------------------|
+| `GET`           | `/products`                   | Get all products                                     | None                              | None                   | `200 OK` with list of `ProductDto`         |
+| `GET`           | `/products/search/{ProductName}`| Get paginated products by product name               | `ProductName` (string)            | None                   | `200 OK` with list of `ProductDto`         |
+| `GET`           | `/products/{id}`               | Get product by ID                                    | `id` (int)                        | None                   | `200 OK` with `ProductDto`                 |
+| `POST`          | `/products`                   | Add a new product                                    | None                              | `ProductUpsertDto`     | `201 Created` with `ProductUpsertDto`      |
+| `PUT`           | `/products/{id}`               | Update an existing product                           | `id` (int)                        | `ProductUpsertDto`     | `204 No Content`                          |
+| `DELETE`        | `/products/{id}`               | Delete a product                                     | `id` (int)                        | None                   | `204 No Content`                          |
+| `GET`           | `/products/brand/{brandId}`    | Get products by brand ID                             | `brandId` (int)                   | None                   | `200 OK` with list of `ProductUpsertDto`  |
+
+## Brand Endpoints
+
+| **HTTP Method** | **Route**                     | **Description**                                      | **Parameters**                    | **Request Body**       | **Response**                               |
+|-----------------|-------------------------------|------------------------------------------------------|-----------------------------------|------------------------|--------------------------------------------|
+| `GET`           | `/brands`                     | Get all brands                                       | None                              | None                   | `200 OK` with list of `BrandDto`           |
+| `GET`           | `/brands/{name}`              | Get paginated brands by name                         | `name` (string)                   | None                   | `200 OK` with list of `BrandDto`           |
+| `GET`           | `/brands/{id}`                | Get brand by ID                                      | `id` (int)                        | None                   | `200 OK` with `BrandDto`                   |
+| `POST`          | `/brands`                     | Add a new brand                                      | None                              | `BrandDto`             | `201 Created` with `BrandDto`              |
+| `PUT`           | `/brands/{id}`                | Update an existing brand                             | `id` (int)                        | `BrandDto`             | `204 No Content`                          |
+| `DELETE`        | `/brands/{id}`                | Delete a brand                                       | `id` (int)                        | None                   | `204 No Content`                          |
+
+## Category Endpoints
+
+| **HTTP Method** | **Route**                     | **Description**                                      | **Parameters**                    | **Request Body**       | **Response**                               |
+|-----------------|-------------------------------|------------------------------------------------------|-----------------------------------|------------------------|--------------------------------------------|
+| `GET`           | `/categories`                 | Get all categories                                   | None                              | None                   | `200 OK` with list of `CategoryDto`        |
+| `GET`           | `/categories/{name}`          | Get paginated categories by name                     | `name` (string)                   | None                   | `200 OK` with list of `CategoryDto`        |
+| `GET`           | `/categories/{id}`            | Get category by ID                                   | `id` (int)                        | None                   | `200 OK` with `CategoryDto`                |
+| `POST`          | `/categories`                 | Add a new category                                   | None                              | `CategoryDto`          | `201 Created` with `CategoryDto`           |
+| `PUT`           | `/categories/{id}`            | Update an existing category                          | `id` (int)                        | `CategoryDto`          | `204 No Content`                          |
+| `DELETE`        | `/categories/{id}`            | Delete a category                                    | `id` (int)                        | None                   | `204 No Content`                          |
+
+## Review Endpoints
+
+| **HTTP Method** | **Route**                     | **Description**                                      | **Parameters**                    | **Request Body**       | **Response**                               |
+|-----------------|-------------------------------|------------------------------------------------------|-----------------------------------|------------------------|--------------------------------------------|
+| `GET`           | `/reviews`                    | Get all reviews                                      | None                              | None                   | `200 OK` with list of `ReviewDto`          |
+| `GET`           | `/reviews/{id}`               | Get review by ID                                     | `id` (int)                        | None                   | `200 OK` with `ReviewDto`                  |
+| `POST`          | `/reviews`                    | Add a new review                                     | None                              | `ReviewUpsertDto`      | `201 Created` with `ReviewUpsertDto`       |
+| `PUT`           | `/reviews/{id}`               | Update an existing review                            | `id` (int)                        | `ReviewUpsertDto`      | `204 No Content`                          |
+| `DELETE`        | `/reviews/{id}`               | Delete a review                                      | `id` (int)                        | None                   | `204 No Content`                          |
+| `GET`           | `/reviews/byProduct/{productId}`| Get reviews by product ID                            | `productId` (int)                 | None                   | `200 OK` with list of `ReviewDto`          |
+
+## SubCategory Endpoints
+
+| **HTTP Method** | **Route**                     | **Description**                                      | **Parameters**                    | **Request Body**       | **Response**                               |
+|-----------------|-------------------------------|------------------------------------------------------|-----------------------------------|------------------------|--------------------------------------------|
+| `GET`           | `/subcategories/{id}`          | Get subcategory by ID                                | `id` (int)                        | None                   | `200 OK` with `SubCategoryDto`             |
+| `GET`           | `/subcategories/search`        | Get paginated subcategories by name                  | `page` (int), `pageSize` (int), `searchTerm` (string) | None | `200 OK` with list of `SubCategoryDto` |
+| `POST`          | `/subcategories`               | Add a new subcategory                                | None                              | `SubCategoryDto`       | `201 Created` with `SubCategoryDto`        |
+| `PUT`           | `/subcategories/{id}`          | Update an existing subcategory                       | `id` (int)                        | `SubCategoryDto`       | `204 No Content`                          |
+| `DELETE`        | `/subcategories/{id}`          | Delete a subcategory                                 | `id` (int)                        | None                   | `204 No Content`                          |
+
+---
+
+### Notes:
+- All POST, PUT, and DELETE requests expect the respective DTOs in the request body (`ProductUpsertDto`, `BrandDto`, `CategoryDto`, etc.).
+- The `id` parameters refer to the specific identifier for products, brands, categories, reviews, or subcategories.
+- Pagination for GET requests with search functionality can be controlled with `page`, `pageSize`, and `searchTerm` parameters.
+
+---
+
+This README table can be copy-pasted directly into your `README.md` file, and it will render as a nice documentation for your API endpoints in Markdown format!
+
+
+
 ## 📋 Versioning and Changelog
 
 ### Current Version
