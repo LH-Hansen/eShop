@@ -1,0 +1,64 @@
+﻿@page "/product/create"
+@using eShop.Web.Models
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<h3>Create New Product</h3>
+
+<EditForm Model="@newProduct" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div>
+        <label>Name:</label>
+        <InputText @bind-Value="newProduct.Name" class="form-control" />
+    </div>
+    <div>
+        <label>Description:</label>
+        <InputText @bind-Value="newProduct.Description" class="form-control" />
+    </div>
+    <div>
+        <label>Price:</label>
+        <InputNumber @bind-Value="newProduct.Price" class="form-control" />
+    </div>
+    <div>
+        <label>Stock:</label>
+        <InputNumber @bind-Value="newProduct.Stock" class="form-control" />
+    </div>
+    <div>
+        <label>Sub Category ID:</label>
+        <InputNumber @bind-Value="newProduct.SubCategoryId" class="form-control" />
+    </div>
+    <div>
+        <label>Brand ID:</label>
+        <InputNumber @bind-Value="newProduct.BrandId" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">Create Product</button>
+</EditForm>
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <p>@message</p>
+}
+
+@code {
+    private ProductCreateRequest newProduct = new ProductCreateRequest();
+    private string message = string.Empty;
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            HttpResponseMessage response = await Http.PostAsJsonAsync("https://localhost:7192/rest/v1/Products", newProduct);
+            if (response.IsSuccessStatusCode)
+                message = "Product created successfully.";
+            else
+                message = $"Failed to create product: {response.ReasonPhrase}";
+        }
+        catch (Exception ex)
+        {
+            message = $"Error: {ex.Message}";
+        }
+    }
+}

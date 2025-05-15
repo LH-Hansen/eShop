@@ -10,14 +10,13 @@ namespace eShop.Test.IntegrationTest
         {
             _client = new HttpClient
             {
-                BaseAddress = new Uri("https://localhost:44394") // 👈 Your running API base URI
+                BaseAddress = new Uri("https://localhost:44394")
             };
         }
 
         [Fact]
         public async Task GetAllProducts_ShouldReturnSuccess()
         {
-            // Hit the actual endpoint, NOT the Swagger page
             var response = await _client.GetAsync("/rest/v1/products");
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);

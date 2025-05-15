@@ -1,0 +1,108 @@
+﻿@page "/products"
+@using eShop.Repository.Entities
+@using eShop.Web.Services
+@inject HttpClient Http
+@inject CartService CartService
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+
+<h3>Product List (Direct API Call)</h3>
+
+@if (products == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in PagedProducts)
+            {
+                <tr>
+                    <td><a href="@($"/product/{product.Id}")">@product.Name</a></td>
+                    <td>@product.Price</td>
+                    <td>@product.Stock</td>
+                    <td>
+                        <button @onclick="() => AddToCart(product)">Add to Cart</button>
+                        <button class="btn btn-primary btn-sm me-2" @onclick="() => NavigateToDetails(product.Id)">Details</button>
+                        <button class="btn btn-warning btn-sm" @onclick="() => NavigateToEdit(product.Id)">Edit</button>
+                    <td><button class="btn btn-danger btn-sm" @onclick="() => DeleteProduct(product.Id)">Delete</button></td>
+                    </td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button @onclick="PreviousPage" disabled="@(!CanGoPrevious)">Previous</button>
+    <button @onclick="NextPage" disabled="@(!CanGoNext)">Next</button>
+    <p>Page @currentPage of @totalPages</p>
+}
+
+@code {
+    private List<Product> products;
+    private int currentPage = 1;
+    private int pageSize = 5;
+
+    private IEnumerable<Product> PagedProducts => products.Skip((currentPage - 1) * pageSize).Take(pageSize);
+
+    private int totalPages => (int)Math.Ceiling((double)products.Count / pageSize);
+
+    private bool CanGoPrevious => currentPage > 1;
+    private bool CanGoNext => currentPage < totalPages;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CartService.InitializeAsync();
+        products = await Http.GetFromJsonAsync<List<Product>>("https://localhost:7192/rest/v1/Products");
+    }
+
+    private void NextPage()
+    {
+        if (CanGoNext)
+            currentPage++;
+    }
+
+    private void PreviousPage()
+    {
+        if (CanGoPrevious)
+            currentPage--;
+    }
+
+    async Task AddToCart(Product product)
+    {
+        await CartService.AddToCart(product);
+    }
+
+    private void NavigateToDetails(int id)
+    {
+        Navigation.NavigateTo($"/product/{id}");
+    }
+
+    private void NavigateToEdit(int id)
+    {
+        Navigation.NavigateTo($"/product/edit/{id}");
+    }
+
+    private async Task DeleteProduct(int id)
+    {
+        bool confirmed = await JS.InvokeAsync<bool>("confirm", "Are you sure you want to delete this product?");
+
+        if (confirmed)
+        {
+            HttpResponseMessage response = await Http.DeleteAsync($"https://localhost:7192/rest/v1/Products/{id}");
+            if (response.IsSuccessStatusCode)
+                await JS.InvokeVoidAsync("alert", "Product deleted successfully.");
+            else
+                await JS.InvokeVoidAsync("alert", $"Failed to delete product: {response.ReasonPhrase}");
+        }
+    }
+}

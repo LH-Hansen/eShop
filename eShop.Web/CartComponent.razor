@@ -1,0 +1,37 @@
+﻿@page "/cart"
+@using eShop.Repository.Entities
+@using eShop.Web.Services
+@inject CartService CartService
+
+<h3>Your Cart</h3>
+
+@if (!CartService.CartItems.Any())
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    <ul>
+        @foreach (Product product in CartService.CartItems)
+        {
+            <li>
+                <b>@product.Name</b> - $@product.Price
+                <button @onclick="() => RemoveFromCart(product.Id)">Remove</button>
+            </li>
+        }
+    </ul>
+
+    <button @onclick="ClearCart">Clear Cart</button>
+}
+
+@code {
+    void RemoveFromCart(int id)
+    {
+        CartService.RemoveFromCart(id);
+    }
+
+    void ClearCart()
+    {
+        CartService.ClearCart();
+    }
+}

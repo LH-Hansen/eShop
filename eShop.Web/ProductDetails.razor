@@ -1,0 +1,58 @@
+﻿@page "/product/{Id:int}"
+@using eShop.Repository.Entities
+@using eShop.Web.Services
+@inject HttpClient Http
+@inject CartService CartService
+
+<h3>Product Details</h3>
+
+@if (product == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div>
+        <h4>@product.Name</h4>
+        <p><strong>Price:</strong> $@product.Price</p>
+        <p><strong>Description:</strong> @product.Description</p>
+        <p><strong>Stock:</strong> @product.Stock</p>
+        <p><strong>Brand:</strong> @product.BrandId</p>
+        <p><strong>Category:</strong> @product.SubCategoryId</p>
+        @if (product.Reviews != null && product.Reviews.Any())
+        {
+            <p><strong>Reviews:</strong></p>
+            <ul>
+                @foreach (Review review in product.Reviews)
+                {
+                    <li>@review.Body</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p><strong>Reviews:</strong> No reviews available.</p>
+        }
+        
+
+        <button @onclick="AddToCart" disabled="@(product.Stock == 0)">Add to Cart</button>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Product? product;
+
+    protected override async Task OnInitializedAsync()
+    {
+        product = await Http.GetFromJsonAsync<Product>($"https://localhost:7192/rest/v1/Products/{Id}");
+    }
+
+    private async Task AddToCart()
+    {
+        if (product != null)
+            await CartService.AddToCart(product);
+    }
+}

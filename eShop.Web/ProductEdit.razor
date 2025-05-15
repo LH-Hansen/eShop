@@ -1,0 +1,86 @@
+﻿@page "/product/edit/{Id:int}"
+@using eShop.Web.Models
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<h3>Edit Product</h3>
+
+@if (product == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <EditForm Model="@product" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div>
+            <label>Name:</label>
+            <InputText @bind-Value="product.Name" class="form-control" />
+        </div>
+        <div>
+            <label>Description:</label>
+            <InputText @bind-Value="product.Description" class="form-control" />
+        </div>
+        <div>
+            <label>Price:</label>
+            <InputNumber @bind-Value="product.Price" class="form-control" />
+        </div>
+        <div>
+            <label>Stock:</label>
+            <InputNumber @bind-Value="product.Stock" class="form-control" />
+        </div>
+        <div>
+            <label>Sub Category ID:</label>
+            <InputNumber @bind-Value="product.SubCategoryId" class="form-control" />
+        </div>
+        <div>
+            <label>Brand ID:</label>
+            <InputNumber @bind-Value="product.BrandId" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-success mt-2">Save Changes</button>
+    </EditForm>
+
+    @if (!string.IsNullOrEmpty(message))
+    {
+        <p>@message</p>
+    }
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private ProductCreateRequest? product;
+    private string message = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            product = await Http.GetFromJsonAsync<ProductCreateRequest>($"https://localhost:7192/rest/v1/Products/{Id}");
+        }
+        catch (Exception ex)
+        {
+            message = $"Error loading product: {ex.Message}";
+        }
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            HttpResponseMessage response = await Http.PutAsJsonAsync($"https://localhost:7192/rest/v1/Products/{Id}", product);
+            if (response.IsSuccessStatusCode)
+                message = "Product updated successfully.";
+            else
+                message = $"Failed to update product: {response.ReasonPhrase}";
+        }
+        catch (Exception ex)
+        {
+            message = $"Error: {ex.Message}";
+        }
+    }
+}

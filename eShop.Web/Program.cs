@@ -1,55 +1,19 @@
-using eShop.Repository.Data;
-using eShop.Repository.Repositories.Generics.Generic;
-using eShop.Repository.Repositories.Generics.Interface;
-using eShop.Service.Services.Generics.Generic;
-using eShop.Service.Services.Generics.IGeneric;
-using eShop.Service.Services.IService;
-using eShop.Service.Services.Service;
-using Microsoft.EntityFrameworkCore;
+using Blazored.LocalStorage;
+using eShop.Web;
+using eShop.Web.Services;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebAssemblyHostBuilder.CreateDefault(args);
+builder.RootComponents.Add<App>("#app");
+builder.RootComponents.Add<HeadOutlet>("head::after");
 
-// Add services to the container.
-builder.Services.AddRazorPages();
-
-#if DEBUG
-builder.Services.AddDbContext<EShopDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Development"));
-});
-#else
-builder.Services.AddDbContext<EShopDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Production"));
-});
-#endif
-
-#region SCOPES
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
-
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IBrandService, BrandService>();
-#endregion
-
-var app = builder.Build();
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+builder.Services.AddBlazoredLocalStorage();
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
+builder.Services.AddScoped<CartService>();
 
-app.UseRouting();
 
-app.UseAuthorization();
-
-app.MapRazorPages();
-
-app.Run();
+await builder.Build().RunAsync();

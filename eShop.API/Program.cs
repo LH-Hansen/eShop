@@ -52,8 +52,19 @@ builder.Services.AddScoped<ISubCategoryService, SubCategoryService>();
 
 #endregion
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowBlazorWasm",
+        builder => builder
+            .WithOrigins("https://localhost:7012")  // Allow your Blazor app's URL
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 
 var app = builder.Build();
+
+app.UseCors("AllowBlazorWasm");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
