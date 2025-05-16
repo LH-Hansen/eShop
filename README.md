@@ -156,6 +156,7 @@ This project is built using .NET 8.0.
 | **eShop.Service**      | .NET 8.0       | `eShop.Service`<br>- `Services`<br>- `DTO` <br>- `Mapping`<br>-|
 | **eShop.API**          | .NET 8.0       | `eShop.API`<br>- `Controllers` <br>- `Program.cs` |
 | **eShop.Tests**        | .NET 8.0       | `eShop.Tests`<br>- `UnitTests`<br>- `IntegrationTests`<br>- |
+| **eShop.Web**          | .NET 8.0       | `eShop.Web`<br>- `Services` <br>- `Pages`
 
 
 <br>
@@ -174,6 +175,7 @@ This project depends on the following libraries:
 | [Microsoft.EntityFrameworkCore.Configuration](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Configuration)     | Microsoft | `9.0.3` | eShop.Repository |
 | [FluentAssertions](https://www.nuget.org/packages/FluentAssertions)                        | Dennis Doomen, Jonas Nyrup, Xceed | `8.2.0`| eShop.Test |
 | [Moq](https://www.nuget.org/packages/Moq)                                     | Daniel Cazzulino, kzu | `4.20.72`| eShop.Test |
+| [Balozored.LocalStorage](https://github.com/Blazored/LocalStorage)            Chris Sainty | `4.5.0` | eShop.Web |
 <br>
 
 ## API Docuemntation
@@ -266,6 +268,9 @@ This project follows [Semantic Versioning](https://semver.org/) for version cont
 ### Changelog
 
 #### [Unreleased]
+
+#### [0.5.0] - 2025-05-16
+- Added Web Assembly/UI
 
 #### [0.4.0] - 2025-04-10
 - Added unit tests
