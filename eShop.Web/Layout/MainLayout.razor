@@ -7,8 +7,10 @@
 
     <main>
         <div class="top-row px-4">
-            <a href="/products">Products</a> |
-            <a href="/cart">Cart (@CartService.CartItems.Count)</a>
+
+            <a href="/">Products</a> |
+            <a href="/cart">Cart (@CartService.CartItems.Count)</a> |
+            <a href="/product/create">Add Products</a> |
             <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
         </div>
 
@@ -21,3 +23,4 @@
 @code{
     [Inject] private CartService CartService { get; set; }
 }
+<NavMenu />

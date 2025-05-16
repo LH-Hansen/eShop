@@ -1,4 +1,4 @@
-﻿@page "/products"
+﻿@page "/"
 @using eShop.Repository.Entities
 @using eShop.Web.Services
 @inject HttpClient Http
@@ -7,6 +7,9 @@
 @inject NavigationManager Navigation
 
 <h3>Product List (Direct API Call)</h3>
+
+<input @bind="searchTerm" placeholder="Search products..." />
+<button @onclick="SearchProducts">Search</button>
 
 @if (products == null)
 {
@@ -34,9 +37,8 @@ else
                         <button @onclick="() => AddToCart(product)">Add to Cart</button>
                         <button class="btn btn-primary btn-sm me-2" @onclick="() => NavigateToDetails(product.Id)">Details</button>
                         <button class="btn btn-warning btn-sm" @onclick="() => NavigateToEdit(product.Id)">Edit</button>
-                    <td><button class="btn btn-danger btn-sm" @onclick="() => DeleteProduct(product.Id)">Delete</button></td>
+                        <button class="btn btn-danger btn-sm" @onclick="() => DeleteProduct(product.Id)">Delete</button>
                     </td>
-                    
                 </tr>
             }
         </tbody>
@@ -48,7 +50,11 @@ else
 }
 
 @code {
+    private string searchTerm = "";
     private List<Product> products;
+
+#region Pagination
+
     private int currentPage = 1;
     private int pageSize = 5;
 
@@ -58,12 +64,6 @@ else
 
     private bool CanGoPrevious => currentPage > 1;
     private bool CanGoNext => currentPage < totalPages;
-
-    protected override async Task OnInitializedAsync()
-    {
-        await CartService.InitializeAsync();
-        products = await Http.GetFromJsonAsync<List<Product>>("https://localhost:7192/rest/v1/Products");
-    }
 
     private void NextPage()
     {
@@ -77,10 +77,27 @@ else
             currentPage--;
     }
 
-    async Task AddToCart(Product product)
+#endregion
+
+#region API call
+
+    protected override async Task OnInitializedAsync()
     {
-        await CartService.AddToCart(product);
+        await CartService.InitializeAsync();
+        products = await Http.GetFromJsonAsync<List<Product>>("https://localhost:7192/rest/v1/Products");
     }
+
+    private async Task SearchProducts()
+    {
+        if (string.IsNullOrWhiteSpace(searchTerm))
+            products = await Http.GetFromJsonAsync<List<Product>>("https://localhost:7192/rest/v1/Products");
+        else
+            products = await Http.GetFromJsonAsync<List<Product>>($"https://localhost:7192/rest/v1/Products/search/{searchTerm}");
+    }
+       
+#endregion
+
+#region Navigation
 
     private void NavigateToDetails(int id)
     {
@@ -90,6 +107,13 @@ else
     private void NavigateToEdit(int id)
     {
         Navigation.NavigateTo($"/product/edit/{id}");
+    }
+
+#endregion
+
+    async Task AddToCart(Product product)
+    {
+        await CartService.AddToCart(product);
     }
 
     private async Task DeleteProduct(int id)

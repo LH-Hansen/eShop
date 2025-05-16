@@ -33,7 +33,7 @@ namespace eShop.Web.Services
 
         public async Task RemoveFromCart(int productId)
         {
-            var item = _cartItems.Find(p => p.Id == productId);
+            Product item = _cartItems.Find(p => p.Id == productId);
             if (item != null)
             {
                 _cartItems.Remove(item);

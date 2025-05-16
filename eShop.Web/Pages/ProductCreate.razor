@@ -1,4 +1,5 @@
 ﻿@page "/product/create"
+@using eShop.Repository.Entities
 @using eShop.Web.Models
 @inject HttpClient Http
 @inject NavigationManager Navigation
@@ -25,14 +26,42 @@
         <label>Stock:</label>
         <InputNumber @bind-Value="newProduct.Stock" class="form-control" />
     </div>
-    <div>
-        <label>Sub Category ID:</label>
-        <InputNumber @bind-Value="newProduct.SubCategoryId" class="form-control" />
-    </div>
-    <div>
-        <label>Brand ID:</label>
-        <InputNumber @bind-Value="newProduct.BrandId" class="form-control" />
-    </div>
+
+    @if (categories == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <div>
+            <label>Sub Category:</label>
+            <InputSelect @bind-Value="newProduct.SubCategoryId" class="form-control">
+                <option value="">-- Select Sub Category --</option>
+                @foreach (SubCategory category in categories)
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            </InputSelect>
+        </div>
+    }
+
+    @if (brands == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <div>
+            <label>Brand:</label>
+            <InputSelect @bind-Value="newProduct.BrandId" class="form-control">
+                <option value="">-- Select Brand --</option>
+                @foreach (Brand brand in brands)
+                {
+                    <option value="@brand.Id">@brand.Name</option>
+                }
+            </InputSelect>
+        </div>
+    }
 
     <button type="submit" class="btn btn-primary mt-2">Create Product</button>
 </EditForm>
@@ -44,7 +73,15 @@
 
 @code {
     private ProductCreateRequest newProduct = new ProductCreateRequest();
+    private List<Brand> brands;
+    private List<SubCategory> categories;
     private string message = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        brands = await Http.GetFromJsonAsync<List<Brand>>("https://localhost:7192/rest/v1/Brands");
+        categories = await Http.GetFromJsonAsync<List<SubCategory>>("https://localhost:7192/rest/v1/SubCategories");
+    }
 
     private async Task HandleValidSubmit()
     {
