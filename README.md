@@ -32,7 +32,9 @@
 
 ## 📘 Introduction
 
-Welcome to the eShop project! This application is a brand management system designed to help manage and display brand information. Users can create, update, delete, and search brands through an easy-to-use interface. This project implements pagination for displaying brands, with options for adding or modifying brand details and features an efficient search mechanism.
+Welcome to the eShop project!
+This application is a complete e-commerce platform that includes a backend brand management system and a separate web frontend.
+Users can manage brands, products, categories, and reviews. The backend provides a REST API while the web app offers a user-friendly UI using modern web technologies.
 
 <br>
 
